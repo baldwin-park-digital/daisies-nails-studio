@@ -28,25 +28,25 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   company: {
-    name: "Your Company",
-    description: "Building amazing products and services for our customers.",
-    logo: "YourLogo",
+    name: "Daisies Nail Studio",
+    description: "Experience sophisticated nail artistry in an airy, elegant atmosphere. Premium nail care services in the heart of Los Angeles.",
+    logo: "Daisies",
     logoHref: "./",
   },
   contact: {
-    email: "hello@yourcompany.com",
-    phone: "+1 (555) 123-4567",
-    address: "123 Main St, City, State 12345",
+    email: "hello@daisiesnailstudio.com",
+    phone: "+1 (323) 957-9879",
+    address: "5770 Melrose Ave, Los Angeles, CA 90038",
   },
   hours: [
-    { day: "Monday - Friday", time: "9:00 AM - 5:00 PM" },
-    { day: "Saturday", time: "10:00 AM - 4:00 PM" },
-    { day: "Sunday", time: "Closed" },
+    { day: "Monday - Friday", time: "10:00 AM - 8:00 PM" },
+    { day: "Saturday", time: "10:00 AM - 7:00 PM" },
+    { day: "Sunday", time: "11:00 AM - 6:00 PM" },
   ],
   social: [
-    { label: "Twitter", href: "https://twitter.com", icon: "𝕏" },
-    { label: "LinkedIn", href: "https://linkedin.com", icon: "in" },
-    { label: "GitHub", href: "https://github.com", icon: "◆" },
-    { label: "Instagram", href: "https://instagram.com", icon: "📷" },
+    { label: "Instagram", href: "https://instagram.com/daisiesnailstudio", icon: "📷" },
+    { label: "Facebook", href: "https://facebook.com/daisiesnailstudio", icon: "f" },
+    { label: "Yelp", href: "https://yelp.com/biz/daisies-nail-studio", icon: "★" },
+    { label: "Google", href: "https://maps.google.com/?q=5770+Melrose+Ave+Los+Angeles+CA+90038", icon: "G" },
   ],
 };

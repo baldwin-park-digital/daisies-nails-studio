@@ -12,7 +12,7 @@ const { title, description = "Welcome to our static site" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -22,7 +22,7 @@ const { title, description = "Welcome to our static site" } = Astro.props;
     <title>{title}</title>
     <script is:inline>
       // Apply theme from localStorage immediately to prevent flash
-      const theme = localStorage.getItem("theme") || "dark";
+      const theme = localStorage.getItem("theme") || "light";
       document.documentElement.setAttribute("data-theme", theme);
     </script>
   </head>

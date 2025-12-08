@@ -12,12 +12,12 @@ import Contact from "../components/Contact.astro";
 import { featuresCardGrid, cardVariantsGrid } from "../data/cardGrid";
 ---
 
-<Layout title="Welcome" description="Astro starter template for static sites">
+<Layout title="Daisies Nail Studio - Los Angeles" description="Experience sophisticated nail artistry at Daisies Nail Studio. Premium manicures, pedicures, and custom nail art in an elegant Los Angeles setting.">
   <Hero
-    title="Welcome to Your Static Site"
-    description="Built with Astro & Tailwind CSS for blazing fast performance"
-    primaryCta={{ label: "Get Started", href: "#about" }}
-    secondaryCta={{ label: "Learn More", href: "#services" }}
+    title="Sophisticated Nail Artistry"
+    description="Experience elegance and pampering at Los Angeles' premier nail studio. Book your appointment today."
+    primaryCta={{ label: "Book Now", href: "tel:+13239579879" }}
+    secondaryCta={{ label: "View Services", href: "#services" }}
     fullViewport
   />
 
@@ -28,16 +28,16 @@ import { featuresCardGrid, cardVariantsGrid } from "../data/cardGrid";
   <About />
 
   <Menu
-    title="Featured Items"
-    description="A taste of what we offer"
+    title="Our Services"
+    description="Premium nail care tailored to you"
     isPreview
     previewLimit={6}
-    previewCta={{ label: "View Full Menu", href: "/menu" }}
+    previewCta={{ label: "View All Services", href: "#contact" }}
   />
 
   <Gallery
     title="Our Work"
-    description="Explore our portfolio of beautiful projects"
+    description="Explore our portfolio of stunning nail designs"
     showCategories
   />
 
@@ -48,10 +48,10 @@ import { featuresCardGrid, cardVariantsGrid } from "../data/cardGrid";
   <Contact showMap={true}/>
 
   <CTA
-    title="Ready to Build?"
-    description="Customize this template to create your perfect static site"
-    primaryCta={{ label: "Get Started", href: "#about" }}
-    secondaryCta={{ label: "View Docs", href: "/docs" }}
+    title="Ready to Experience Luxury?"
+    description="Book your appointment at Daisies Nail Studio today"
+    primaryCta={{ label: "Call Now", href: "tel:+13239579879" }}
+    secondaryCta={{ label: "Find Us", href: "#contact" }}
     variant="gradient"
   />
 </Layout>
