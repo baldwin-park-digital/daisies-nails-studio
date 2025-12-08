@@ -21,8 +21,8 @@ export const navigationConfig: NavigationConfig = {
     { label: "Contact", href: "#contact" }
   ],
   actionItems: [
-    { label: globalSiteConfig.contact.phone || "", href: `tel:+13239579879`, variant: "default" },
-    { label: "Book Now", href: "tel:+13239579879", variant: "primary" },
+    { label: globalSiteConfig.contact.phone || "", href: `tel:${globalSiteConfig.contact.phone?.replace(/\D/g, '')}`, variant: "default" },
+    { label: "Book Now", href: `tel:${globalSiteConfig.contact.phone?.replace(/\D/g, '')}`, variant: "primary" },
   ]
 };
 
