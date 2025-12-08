@@ -122,8 +122,9 @@ Use Tailwind utility classes defined via custom properties:
 
 - Mobile-first approach
 - Use Tailwind breakpoints: `sm:`, `md:`, `lg:`, `xl:`
-- Common spacing: `py-16 md:py-12` for sections
-- Container: `max-w-6xl mx-auto px-6 md:px-2`
+- Section spacing pattern: `py-16 md:py-12` (sections reduce vertical padding on larger screens since the fixed-width container provides spacing)
+- Container pattern: `max-w-6xl mx-auto px-6 md:px-2` (horizontal padding reduces on larger screens as the max-width container creates margins)
+- Note: The padding reduction on larger screens is intentional - the max-width containers provide natural spacing, so less internal padding is needed
 
 ### Data Configuration Pattern
 
@@ -187,6 +188,8 @@ Most page sections follow this pattern:
   </div>
 </section>
 ```
+
+**Note on responsive spacing**: The padding decreases on larger screens (`md:py-12` instead of `py-16`) because the fixed-width container (`max-w-6xl`) creates natural margins, making less internal padding necessary.
 
 ## Best Practices
 
