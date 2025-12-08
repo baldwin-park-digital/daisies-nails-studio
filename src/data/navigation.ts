@@ -16,20 +16,13 @@ export interface NavigationConfig {
 export const navigationConfig: NavigationConfig = {
   navItems: [
     { label: "Home", href: "/" },
-    {
-      label: "Docs",
-      href: "/docs",
-      submenu: [
-        { label: "Getting Started", href: "/docs" },
-        { label: "API Reference", href: "/docs/api" },        { label: "API Reference", href: "/docs/api" },
-      ]
-    },
-    { label: "Theme", href: "/theme" },
+    { label: "Services", href: "#services" },
+    { label: "Gallery", href: "#gallery" },
     { label: "Contact", href: "#contact" }
   ],
   actionItems: [
-    { label: globalSiteConfig.contact.phone || "", href: `tel:${globalSiteConfig.contact.phone}`, variant: "default" },
-    { label: "Get Started", href: "/signup", variant: "outline" },
+    { label: globalSiteConfig.contact.phone || "", href: `tel:+13239579879`, variant: "default" },
+    { label: "Book Now", href: "tel:+13239579879", variant: "primary" },
   ]
 };
 

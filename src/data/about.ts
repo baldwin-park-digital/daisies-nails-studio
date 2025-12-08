@@ -15,32 +15,32 @@ export interface AboutContent {
 }
 
 export const aboutContent: AboutContent = {
-  title: "About Us",
-  subtitle: "Building exceptional digital experiences",
+  title: "About Daisies Nail Studio",
+  subtitle: "Where sophistication meets artistry",
   description:
-    "We're a team of passionate designers and developers dedicated to creating beautiful, functional websites that help small businesses thrive online. With years of experience and a client-first approach, we transform ideas into stunning digital realities.",
-  image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop",
+    "Welcome to Daisies Nail Studio, Los Angeles' premier destination for sophisticated nail care. Our elegant, airy studio offers a tranquil escape where artistry and pampering converge. With a team of talented nail technicians and a commitment to using only the finest products, we create beautiful, long-lasting results in an atmosphere of refined luxury. Each visit is a personalized experience designed to leave you feeling polished and refreshed.",
+  image: "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&h=600&fit=crop",
   stats: [
-    { label: "Projects Completed", value: "100+" },
-    { label: "Happy Clients", value: "50+" },
-    { label: "Years Experience", value: "5+" },
-    { label: "Team Members", value: "10+" },
+    { label: "Years of Excellence", value: "8+" },
+    { label: "Happy Clients", value: "2000+" },
+    { label: "5-Star Reviews", value: "500+" },
+    { label: "Expert Technicians", value: "6" },
   ],
   values: [
     {
-      title: "Quality First",
+      title: "Artistry & Precision",
       description:
-        "We never compromise on quality. Every project is crafted with attention to detail and built to last.",
+        "Our talented technicians are true artists, bringing creativity and meticulous attention to detail to every service.",
     },
     {
-      title: "Client-Focused",
+      title: "Premium Products",
       description:
-        "Your success is our success. We work closely with you to understand your goals and deliver results.",
+        "We use only the highest quality polishes, gels, and treatments that are both beautiful and gentle on your nails.",
     },
     {
-      title: "Innovation",
+      title: "Relaxing Atmosphere",
       description:
-        "We stay ahead of trends and use cutting-edge technology to give you a competitive advantage.",
+        "Step into our elegant, airy studio designed to be your peaceful retreat from the bustle of Los Angeles.",
     },
   ],
 };

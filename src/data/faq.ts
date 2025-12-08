@@ -7,32 +7,32 @@ export interface FAQItem {
 export const faqs: FAQItem[] = [
   {
     id: "1",
-    question: "What services do you offer?",
-    answer: "We offer a comprehensive range of services including web design, development, branding, and digital marketing. Each service is tailored to meet your specific business needs and goals.",
+    question: "Do I need an appointment?",
+    answer: "While we welcome walk-ins based on availability, we highly recommend booking an appointment to ensure your preferred time and technician. You can call us at (323) 957-9879 to schedule.",
   },
   {
     id: "2",
-    question: "How long does a typical project take?",
-    answer: "Project timelines vary based on scope and complexity. A simple website typically takes 2-4 weeks, while more complex projects may take 6-12 weeks. We'll provide a detailed timeline during our initial consultation.",
+    question: "How long do gel manicures last?",
+    answer: "Our gel manicures typically last 2-3 weeks without chipping. The longevity depends on your nail care habits and daily activities, but we use premium gel products that ensure long-lasting, beautiful results.",
   },
   {
     id: "3",
-    question: "What is your pricing structure?",
-    answer: "Our pricing is project-based and depends on your specific requirements. We offer flexible packages to suit different budgets and needs. Contact us for a free consultation and custom quote.",
+    question: "What's the difference between gel and regular polish?",
+    answer: "Regular polish air-dries and typically lasts 5-7 days, while gel polish is cured under UV/LED light and lasts 2-3 weeks. Gel provides a high-shine, chip-resistant finish but requires professional removal. We offer both options to suit your needs.",
   },
   {
     id: "4",
-    question: "Do you provide ongoing support?",
-    answer: "Yes! We offer maintenance and support packages to keep your website running smoothly. This includes updates, security monitoring, backups, and technical support whenever you need it.",
+    question: "How much does nail art cost?",
+    answer: "Custom nail art starts at $10 per nail and varies based on the complexity of the design. Simple designs like dots or stripes are on the lower end, while intricate hand-painted art or 3D embellishments cost more. We'll provide a quote before we begin.",
   },
   {
     id: "5",
-    question: "Can you help with SEO and marketing?",
-    answer: "Absolutely. We build SEO-friendly websites and offer digital marketing services including content strategy, social media management, and paid advertising campaigns to help grow your online presence.",
+    question: "Are your products safe and cruelty-free?",
+    answer: "Yes! We prioritize your health and use high-quality, non-toxic polishes and products. Many of our polishes are 5-free or better, meaning they're free from harmful chemicals. We also carry several vegan and cruelty-free product lines.",
   },
   {
     id: "6",
-    question: "What makes you different from other agencies?",
-    answer: "We focus on building long-term partnerships with our clients. Our personalized approach, transparent communication, and commitment to quality ensure you get a solution that truly works for your business.",
+    question: "What should I do to care for my nails between visits?",
+    answer: "Keep your nails moisturized with cuticle oil daily, wear gloves when doing housework or dishes, and avoid using your nails as tools. For gel manicures, don't pick at the polish if it starts to lift—come see us for safe removal to prevent nail damage.",
   },
 ];
