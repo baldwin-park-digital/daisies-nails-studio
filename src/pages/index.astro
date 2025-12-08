@@ -1,0 +1,57 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import CardGrid from "../components/CardGrid.astro";
+import CTA from "../components/CTA.astro";
+import Testimonials from "../components/Testimonials.astro";
+import FAQ from "../components/FAQ.astro";
+import Gallery from "../components/Gallery.astro";
+import About from "../components/About.astro";
+import Menu from "../components/Menu.astro";
+import Contact from "../components/Contact.astro";
+import { featuresCardGrid, cardVariantsGrid } from "../data/cardGrid";
+---
+
+<Layout title="Welcome" description="Astro starter template for static sites">
+  <Hero
+    title="Welcome to Your Static Site"
+    description="Built with Astro & Tailwind CSS for blazing fast performance"
+    primaryCta={{ label: "Get Started", href: "#about" }}
+    secondaryCta={{ label: "Learn More", href: "#services" }}
+    fullViewport
+  />
+
+  <section id="services" class="py-16 md:py-12">
+    <CardGrid config={cardVariantsGrid} />
+  </section>
+
+  <About />
+
+  <Menu
+    title="Featured Items"
+    description="A taste of what we offer"
+    isPreview
+    previewLimit={6}
+    previewCta={{ label: "View Full Menu", href: "/menu" }}
+  />
+
+  <Gallery
+    title="Our Work"
+    description="Explore our portfolio of beautiful projects"
+    showCategories
+  />
+
+  <Testimonials />
+
+  <FAQ />
+
+  <Contact showMap={true}/>
+
+  <CTA
+    title="Ready to Build?"
+    description="Customize this template to create your perfect static site"
+    primaryCta={{ label: "Get Started", href: "#about" }}
+    secondaryCta={{ label: "View Docs", href: "/docs" }}
+    variant="gradient"
+  />
+</Layout>

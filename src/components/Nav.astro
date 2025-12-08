@@ -1,0 +1,412 @@
+---
+import { siteConfig } from "../data/navigation";
+import type { NavItem } from "../data/navigation";
+import { SITE_CONSTANTS } from "../data/constants";
+import ThemeToggle from "./ThemeToggle.astro";
+import Button from "./Button.astro";
+
+interface Props {
+  logo?: string;
+  logoHref?: string;
+  navItems?: NavItem[];
+  actionItems?: NavItem[];
+}
+
+const {
+  logo = siteConfig.logo,
+  logoHref = siteConfig.logoHref,
+  navItems = siteConfig.navItems,
+  actionItems = siteConfig.actionItems,
+} = Astro.props;
+
+// Calculate delays for staggered animation (last item first)
+const allItems = [...navItems, ...(actionItems || [])];
+const delays = allItems.map((_, index) => (allItems.length - 1 - index) * 50);
+
+// Helper function to get link classes based on variant
+const getLinkClasses = (variant?: string) => {
+  switch (variant) {
+    case "primary":
+      return "button-primary";
+    case "secondary":
+      return "button-secondary";
+    case "outline":
+      return "button-outline";
+    case "action":
+      return "button-action";
+    default:
+      return "font-medium transition-colors text-primary hover:text-primary-hover py-5";
+  }
+};
+
+
+---
+
+<nav
+  class="sticky top-0 z-100 bg-linear-to-r from-surface to-surface-dim shadow-md"
+>
+  <div
+    class="max-w-6xl mx-auto px-6 md:px-2 md:py-0 py-3 flex justify-between items-center"
+  >
+    <a href={logoHref} class="text-2xl font-bold">{logo}</a>
+    <div class="flex items-center gap-4 md:flex-row-reverse">
+      <ThemeToggle />
+      <button
+        id="hamburger"
+        class="md:hidden flex flex-col justify-center items-center w-10 h-10 z-50 relative gap-1"
+        aria-label="Toggle menu"
+        type="button"
+      >
+        <span
+          id="line1"
+          class="w-5 h-0.5 bg-primary block"
+          style="transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;"
+        ></span>
+        <span
+          id="line2"
+          class="w-5 h-0.5 bg-primary block"
+          style="transition: opacity 300ms ease-in-out;"></span>
+        <span
+          id="line3"
+          class="w-5 h-0.5 bg-primary block"
+          style="transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;"
+        ></span>
+      </button>
+      <div
+        id="backdrop"
+        class="fixed left-0 right-0 bottom-0 z-40 transition-opacity opacity-0 pointer-events-none md:hidden bg-linear-to-r from-surface to-surface-dim"
+        style={`top: ${SITE_CONSTANTS.NAV_HEIGHT}px;`}
+      >
+      </div>
+      <ul
+        id="mobileMenu"
+        class="hidden md:flex md:items-center fixed left-0 right-0 bottom-0 transition-opacity w-full bg-linear-to-r from-surface to-surface-dim opacity-0 flex-col z-[60] pointer-events-none md:static md:flex-row md:gap-6 lg:gap-8 md:p-0 md:w-auto md:h-auto md:translate-y-0 md:shrink md:grow-0 md:bg-transparent md:opacity-100 md:overflow-visible md:pointer-events-auto"
+        style={`top: ${SITE_CONSTANTS.NAV_HEIGHT}px;`}
+      >
+        {/* Scrollable nav items */}
+        <div class="flex-1 overflow-y-auto flex flex-col items-center justify-start px-4 md:contents md:overflow-visible md:flex-none md:py-0" style={`padding-top: calc(25svh - ${SITE_CONSTANTS.NAV_HEIGHT}px);`}>
+          {navItems.map((item, index) => {
+            const hasSubmenu = item.submenu && item.submenu.length > 0;
+            const delayIndex = index;
+
+            return (
+              <li
+                class="opacity-0 md:opacity-100 translate-y-4 md:translate-y-0 transition-all duration-500 md:shrink md:whitespace-nowrap text-xl md:text-base relative overflow-visible py-5 px-6 md:py-0 md:px-0"
+                style={`transition-delay: ${delays[delayIndex]}ms;`}
+                data-has-submenu={hasSubmenu}
+              >
+              {hasSubmenu ? (
+                <div class="group relative flex flex-col w-full md:w-auto">
+                  <button
+                    type="button"
+                    class={`${getLinkClasses(item.variant)} flex items-center justify-center gap-1 md:px-2`}
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {item.label}
+                    <span class="text-sm md:hidden transition-transform translate-y-0.5" data-submenu-arrow>▼</span>
+                    <span class="hidden md:inline text-xs transition-transform group-hover:rotate-180 translate-y-0.5">▼</span>
+                  </button>
+
+                  {/* Invisible spacer to keep hover active while moving to submenu */}
+                  <div class="hidden md:block md:absolute md:left-0 md:right-0 md:top-full md:h-2 md:z-40 md:pointer-events-auto" />
+
+                  {/* Desktop Submenu Wrapper with padding for hover area */}
+                  <div class="hidden md:group-hover:block md:absolute md:left-0 md:right-0 md:top-full md:pt-2 md:z-50 md:opacity-100">
+                    {/* Inner submenu that aligns flush with nav bar */}
+                    <ul class="submenu md:bg-surface-dim md:rounded md:shadow-lg md:border md:border-primary/20 md:p-2 md:flex md:flex-wrap md:w-96 md:opacity-100 md:visible">
+                      {item.submenu!.map((subitem) => (
+                        <li class="px-4 py-2 md:py-2 hover:bg-surface-bright transition-colors md:w-1/2 md:opacity-100">
+                          <a
+                            href={subitem.href}
+                            class={getLinkClasses(subitem.variant)}
+                            target={subitem.external ? "_blank" : undefined}
+                            rel={subitem.external ? "noopener noreferrer" : undefined}
+                          >
+                            {subitem.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Mobile Submenu - Expandable */}
+                  <ul class="submenu-mobile md:hidden max-h-0 overflow-hidden rounded mt-2 md:mt-0 flex flex-wrap w-full md:static">
+                    {item.submenu!.map((subitem) => (
+                      <li class="px-4 py-3 w-1/2">
+                        <a
+                          href={subitem.href}
+                          class={`${getLinkClasses(subitem.variant)} text-lg block text-center`}
+                          target={subitem.external ? "_blank" : undefined}
+                          rel={subitem.external ? "noopener noreferrer" : undefined}
+                        >
+                          {subitem.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <a
+                  href={item.href}
+                  class={getLinkClasses(item.variant)}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noopener noreferrer" : undefined}
+                >
+                  {item.label}
+                </a>
+              )}
+            </li>
+          );
+        })}
+        </div>
+
+        {/* Fixed action items at bottom */}
+        {actionItems && actionItems.length > 0 && (
+          <>
+            <li
+              class="hidden md:hidden w-full max-w-xs border-t border-primary/20 my-4 md:hidden"
+              aria-hidden="true"
+            />
+            <div class="md:contents flex flex-col items-center justify-center gap-10 px-8 pb-24 md:gap-0 md:p-0 md:pb-0 border-t border-primary/20 md:border-t-0 pt-10 md:pt-0 w-full">
+              {actionItems && actionItems.map((item, index) => (
+                <li
+                  class="opacity-0 md:opacity-100 translate-y-4 md:translate-y-0 md:shrink-0 text-xl md:text-base w-full md:w-auto text-center md:text-left"
+                  style={`transition-delay: ${delays[navItems.length + index]}ms;`}
+                >
+                  <Button
+                    as="a"
+                    href={item.href}
+                    variant={item.variant as "primary" | "secondary" | "outline" | "action"}
+                    external={item.external}
+                    size="action"
+                  >
+                    {item.label}
+                  </Button>
+                </li>
+              ))}
+            </div>
+          </>
+        )}
+      </ul>
+    </div>
+  </div>
+  <script>
+    const hamburger = document.getElementById("hamburger") as HTMLButtonElement;
+    const mobileMenu = document.getElementById("mobileMenu") as HTMLUListElement;
+    const backdrop = document.getElementById("backdrop") as HTMLDivElement;
+    const line1 = document.getElementById("line1") as HTMLSpanElement;
+    const line2 = document.getElementById("line2") as HTMLSpanElement;
+    const line3 = document.getElementById("line3") as HTMLSpanElement;
+
+    function toggleSubmenu(button: HTMLElement) {
+      const wrapper = button.closest("div");
+      if (!wrapper) return;
+
+      // Get the mobile submenu
+      const submenu = wrapper.querySelector(".submenu-mobile") as HTMLElement | null;
+      if (!submenu) return;
+
+      // Only toggle on mobile
+      if (window.innerWidth < 768) {
+        const isOpen = submenu.style.maxHeight && submenu.style.maxHeight !== "0px";
+        const newOpen = !isOpen;
+
+        // Close all other submenus (accordion behavior)
+        if (newOpen) {
+          mobileMenu.querySelectorAll(".submenu-mobile").forEach((otherSubmenu) => {
+            if (otherSubmenu !== submenu) {
+              (otherSubmenu as HTMLElement).style.maxHeight = "0px";
+              const otherButton = otherSubmenu.closest("div")?.querySelector("button[aria-haspopup]");
+              if (otherButton) {
+                otherButton.setAttribute("aria-expanded", "false");
+                const arrow = otherButton.querySelector("[data-submenu-arrow]");
+                if (arrow) arrow.classList.remove("rotate-180");
+              }
+            }
+          });
+        }
+
+        // Set max-height to scrollHeight or 0
+        submenu.style.maxHeight = newOpen ? submenu.scrollHeight + "px" : "0px";
+
+        // Rotate arrow
+        const arrow = button.querySelector("[data-submenu-arrow]");
+        if (arrow) {
+          if (newOpen) {
+            arrow.classList.add("rotate-180");
+          } else {
+            arrow.classList.remove("rotate-180");
+          }
+        }
+
+        (button as HTMLButtonElement).setAttribute("aria-expanded", String(newOpen));
+        console.log("Toggled submenu", { newOpen, scrollHeight: submenu.scrollHeight, maxHeight: submenu.style.maxHeight });
+      }
+    }
+
+    function closeAllSubmenus() {
+      mobileMenu.querySelectorAll(".submenu-mobile").forEach((submenu) => {
+        (submenu as HTMLElement).style.maxHeight = "0px";
+      });
+
+      mobileMenu.querySelectorAll("button[aria-haspopup]").forEach((button) => {
+        button.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    function closeMenu() {
+      const menuItems = mobileMenu.querySelectorAll("li");
+      menuItems.forEach((item) => {
+        item.classList.add("opacity-0");
+        item.classList.remove("opacity-100");
+      });
+      mobileMenu.classList.add("opacity-0");
+      mobileMenu.classList.remove("opacity-100");
+      mobileMenu.classList.add("pointer-events-none");
+      mobileMenu.classList.remove("pointer-events-auto");
+      backdrop.classList.remove("opacity-100");
+      backdrop.classList.add("opacity-0");
+      backdrop.classList.remove("pointer-events-auto");
+      backdrop.classList.add("pointer-events-none");
+      document.body.style.overflow = "";
+
+      // Close all mobile submenus
+      const submenus = mobileMenu.querySelectorAll(".submenu-mobile");
+      submenus.forEach((submenu) => {
+        (submenu as HTMLElement).style.maxHeight = "0px";
+      });
+
+      // Reset hamburger animation
+      line1.style.transform = "none";
+      line2.style.opacity = "1";
+      line3.style.transform = "none";
+
+      // Hide menu after transition completes
+      setTimeout(() => {
+        mobileMenu.classList.remove("flex");
+        mobileMenu.classList.add("hidden");
+      }, 300); // Match transition duration
+    }
+
+    function openMenu() {
+      const menuItems = mobileMenu.querySelectorAll("li");
+      backdrop.classList.add("opacity-100");
+      backdrop.classList.remove("opacity-0");
+      backdrop.classList.add("pointer-events-auto");
+      backdrop.classList.remove("pointer-events-none");
+      document.body.style.overflow = "hidden";
+
+      mobileMenu.classList.remove("hidden");
+      mobileMenu.classList.add("flex");
+      mobileMenu.classList.add("pointer-events-auto");
+      mobileMenu.classList.remove("pointer-events-none");
+
+      // Small delay to trigger CSS transitions
+      requestAnimationFrame(() => {
+        mobileMenu.classList.add("opacity-100");
+        mobileMenu.classList.remove("opacity-0");
+        menuItems.forEach((item) => {
+          item.classList.remove("opacity-0", "translate-y-4");
+          item.classList.add("opacity-100", "translate-y-0");
+        });
+      });
+
+      // Animate hamburger to X
+      line1.style.transform = "translateY(6px) rotate(45deg)";
+      line2.style.opacity = "0";
+      line3.style.transform = "translateY(-6px) rotate(-45deg)";
+    }
+
+    // Named event handlers for proper cleanup
+    const handleHamburgerClick = () => {
+      const isOpen = backdrop.classList.contains("opacity-100");
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    };
+
+    const handleSubmenuToggleClick = (e: Event) => {
+      const button = (e.target as HTMLElement).closest("button[aria-haspopup]");
+      if (button) {
+        e.preventDefault();
+        toggleSubmenu(button as HTMLElement);
+      }
+    };
+
+    const handleKeyboardInput = (e: Event) => {
+      const keyEvent = e as KeyboardEvent;
+      const button = (keyEvent.target as HTMLElement).closest("button[aria-haspopup]");
+      if (button) {
+        if (keyEvent.key === "Enter" || keyEvent.key === " ") {
+          keyEvent.preventDefault();
+          toggleSubmenu(button as HTMLElement);
+        } else if (keyEvent.key === "Escape") {
+          closeAllSubmenus();
+        }
+      }
+    };
+
+    // Handle resize to close menu when switching to desktop
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        const isOpen = backdrop.classList.contains("opacity-100");
+        if (isOpen) {
+          // Disable transitions temporarily for instant hide
+          mobileMenu.style.transition = "none";
+          backdrop.style.transition = "none";
+          
+          const menuItems = mobileMenu.querySelectorAll("li");
+          menuItems.forEach((item) => {
+            (item as HTMLElement).style.transition = "none";
+          });
+
+          closeMenu();
+
+          // Re-enable transitions after a frame
+          requestAnimationFrame(() => {
+            mobileMenu.style.transition = "";
+            backdrop.style.transition = "";
+            menuItems.forEach((item) => {
+              (item as HTMLElement).style.transition = "";
+            });
+          });
+        }
+        
+        // Reset submenu inline styles on desktop (they're controlled by CSS hover)
+        const submenus = mobileMenu.querySelectorAll(".submenu-mobile");
+        submenus.forEach((submenu) => {
+          (submenu as HTMLElement).style.maxHeight = "";
+        });
+        
+        // Reset aria-expanded and arrow rotation
+        const buttons = mobileMenu.querySelectorAll("button[aria-haspopup]");
+        buttons.forEach((button) => {
+          button.setAttribute("aria-expanded", "false");
+          const arrow = button.querySelector("[data-submenu-arrow]");
+          if (arrow) arrow.classList.remove("rotate-180");
+        });
+      }
+    };
+
+    // Attach event listeners
+    hamburger.addEventListener("click", handleHamburgerClick);
+    backdrop.addEventListener("click", closeMenu);
+    mobileMenu.addEventListener("click", handleSubmenuToggleClick);
+    mobileMenu.addEventListener("keydown", handleKeyboardInput);
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup function
+    const cleanup = () => {
+      hamburger.removeEventListener("click", handleHamburgerClick);
+      backdrop.removeEventListener("click", closeMenu);
+      mobileMenu.removeEventListener("click", handleSubmenuToggleClick);
+      mobileMenu.removeEventListener("keydown", handleKeyboardInput);
+      window.removeEventListener("resize", handleResize);
+    };
+
+    // Cleanup when user leaves page (closes tab, goes to different site)
+    window.addEventListener("beforeunload", cleanup);
+

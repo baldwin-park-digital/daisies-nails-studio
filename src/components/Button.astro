@@ -1,0 +1,87 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Variant = "primary" | "secondary" | "outline" | "action";
+type Size = "sm" | "md" | "lg" | "action";
+type As = "button" | "a" | "span";
+
+interface Props extends Omit<HTMLAttributes<"button">, "size"> {
+  variant?: Variant;
+  size?: Size;
+  fullWidth?: boolean;
+  disabled?: boolean;
+  loading?: boolean;
+  as?: As;
+  href?: string;
+  external?: boolean;
+  icon?: string;
+  iconEnd?: string;
+}
+
+const {
+  variant = "primary",
+  size = "md",
+  fullWidth = false,
+  disabled = false,
+  loading = false,
+  as = "button",
+  href,
+  external = false,
+  icon,
+  iconEnd,
+  class: additionalClasses = "",
+} = Astro.props;
+
+// Map size to classes
+const sizeClasses: Record<Size, string> = {
+  sm: "px-4 py-2 text-sm",
+  md: "px-6 py-3 text-base",
+  lg: "px-8 py-4 text-lg",
+  action: "px-4 py-2",
+};
+
+// Build class string
+const classes = [
+  `button-${variant}`,
+  sizeClasses[size],
+  "font-semibold rounded inline-flex items-center justify-center gap-2",
+  fullWidth && "w-full",
+  disabled && "opacity-50 cursor-not-allowed pointer-events-none",
+  additionalClasses,
+].filter(Boolean).join(" ");
+
+// Determine component to render
+const Component = as === "a" ? "a" : as === "span" ? "span" : "button";
+
+// Set attributes based on component type
+const commonAttrs = {
+  class: classes,
+};
+
+const buttonAttrs = as === "button" ? {
+  type: "button",
+  disabled: disabled || loading,
+  ...commonAttrs,
+} : {};
+
+const linkAttrs = as === "a" ? {
+  href: href || "#",
+  target: external ? "_blank" : undefined,
+  rel: external ? "noopener noreferrer" : undefined,
+  ...commonAttrs,
+} : {};
+
+const spanAttrs = as === "span" ? {
+  role: "button",
+  tabindex: "0",
+  ...commonAttrs,
+} : {};
+
+const finalAttrs = { ...buttonAttrs, ...linkAttrs, ...spanAttrs };
+---
+
+<Component {...finalAttrs}>
+  {icon && <span class="text-base">{icon}</span>}
+  <span>{loading ? "Loading..." : <slot />}</span>
+  {iconEnd && <span class="text-base">{iconEnd}</span>}
+</Component>

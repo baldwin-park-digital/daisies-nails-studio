@@ -1,0 +1,201 @@
+---
+import { menuItems, menuCategories } from "../data/menu";
+import type { MenuItem, MenuCategory } from "../data/menu";
+
+interface Props {
+  title?: string;
+  description?: string;
+  items?: MenuItem[];
+  categories?: MenuCategory[];
+  showCategories?: boolean;
+  variant?: "default" | "highlight";
+  layout?: "grid" | "list";
+  isPreview?: boolean;
+  previewLimit?: number;
+  previewCta?: { label: string; href: string };
+}
+
+const {
+  title = "Our Menu",
+  description,
+  items = menuItems,
+  categories = menuCategories,
+  showCategories = true,
+  variant = "default",
+  layout = "grid",
+  isPreview = false,
+  previewLimit = 6,
+  previewCta,
+} = Astro.props;
+
+const variantClasses = {
+  default: "bg-transparent",
+  highlight: "bg-surface-dim rounded-lg p-8 md:p-6",
+};
+
+// If preview mode, limit items
+const displayItems = isPreview ? items.slice(0, previewLimit) : items;
+
+// Group items by category
+const itemsByCategory = displayItems.reduce((acc, item) => {
+  if (!acc[item.category]) {
+    acc[item.category] = [];
+  }
+  acc[item.category].push(item);
+  return acc;
+}, {} as Record<string, MenuItem[]>);
+---
+
+<section class={`py-16 md:py-12 ${variantClasses[variant]}`} id="menu">
+  <div class="max-w-6xl mx-auto px-6 md:px-2">
+    <!-- Header -->
+    <div class="mb-12 text-center">
+      <h2 class="text-4xl md:text-3xl font-bold text-primary mb-4">
+        {title}
+      </h2>
+      {description && (
+        <p class="text-lg text-on-surface-dim max-w-2xl mx-auto">
+          {description}
+        </p>
+      )}
+    </div>
+
+    <!-- Menu by Category -->
+    {showCategories && categories.map((category) => {
+      const categoryItems = itemsByCategory[category.id] || [];
+      if (categoryItems.length === 0) return null;
+
+      return (
+        <div class="mb-16 last:mb-0">
+          <!-- Category Header -->
+          <div class="mb-8">
+            <h3 class="text-2xl font-bold text-primary mb-2">{category.name}</h3>
+            {category.description && (
+              <p class="text-on-surface-dim">{category.description}</p>
+            )}
+          </div>
+
+          <!-- Menu Items -->
+          {layout === "grid" ? (
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {categoryItems.map((item) => (
+                <div class="card overflow-hidden relative group">
+                  <div class="relative aspect-[4/3] overflow-hidden">
+                    <img
+                      src={item.image || "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=300&fit=crop"}
+                      alt={item.name}
+                      class="w-full h-full object-cover"
+                    />
+                    {/* Gradient overlay */}
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                    
+                    {/* Content overlay */}
+                    <div class="absolute inset-0 p-6 flex flex-col justify-end">
+                      <div class="flex justify-between items-end mb-2">
+                        <h4 class="text-xl font-bold text-white">
+                          {item.name}
+                        </h4>
+                        <span class="text-white font-bold text-xl whitespace-nowrap ml-2">
+                          {item.price}
+                        </span>
+                      </div>
+                      <p class="text-sm text-white/90 mb-3">
+                        {item.description}
+                      </p>
+                      {item.tags && item.tags.length > 0 && (
+                        <div class="flex flex-wrap gap-2">
+                          {item.tags.map((tag) => (
+                            <span class="text-xs bg-white/20 backdrop-blur-sm text-white px-2 py-1 rounded">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Popular badge */}
+                    {item.popular && (
+                      <span class="absolute top-3 right-3 bg-primary text-on-primary text-xs font-semibold px-3 py-1 rounded-full">
+                        Popular
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class="space-y-6">
+              {categoryItems.map((item) => (
+                <div class="card p-6 flex gap-6">
+                  {item.image && (
+                    <div class="relative w-32 h-32 flex-shrink-0 rounded-lg overflow-hidden">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        class="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+                  <div class="flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                      <div>
+                        <h4 class="text-lg font-semibold text-primary flex items-center gap-2">
+                          {item.name}
+                          {item.popular && (
+                            <span class="bg-primary text-on-primary text-xs font-semibold px-2 py-1 rounded">
+                              Popular
+                            </span>
+                          )}
+                        </h4>
+                      </div>
+                      <span class="text-primary font-bold text-lg whitespace-nowrap ml-4">
+                        {item.price}
+                      </span>
+                    </div>
+                    <p class="text-sm text-on-surface-dim mb-3">
+                      {item.description}
+                    </p>
+                    {item.tags && item.tags.length > 0 && (
+                      <div class="flex flex-wrap gap-2">
+                        {item.tags.map((tag) => (
+                          <span class="text-xs bg-surface-bright text-on-surface px-2 py-1 rounded">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      );
+    })}
+
+    <!-- Preview CTA -->
+    {isPreview && previewCta && (
+      <div class="text-center mt-12">
+        <a
+          href={previewCta.href}
+          class="inline-flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
+        >
+          {previewCta.label}
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
+          </svg>
+        </a>
+      </div>
+    )}
+  </div>
+</section>

@@ -1,0 +1,87 @@
+---
+import { aboutContent } from "../data/about";
+import type { AboutContent } from "../data/about";
+import Card from "./Card.astro";
+
+interface Props {
+  content?: AboutContent;
+  variant?: "default" | "highlight";
+  showStats?: boolean;
+  showValues?: boolean;
+}
+
+const {
+  content = aboutContent,
+  variant = "default",
+  showStats = true,
+  showValues = true,
+} = Astro.props;
+
+const variantClasses = {
+  default: "bg-transparent",
+  highlight: "bg-surface-dim",
+};
+---
+
+<section class={`py-16 md:py-12 ${variantClasses[variant]}`} id="about">
+  <div class="max-w-7xl mx-auto px-6 md:px-2">
+    <!-- Header -->
+    <div class="mb-12 text-center">
+      {content.subtitle && (
+        <p class="text-sm font-semibold text-primary uppercase tracking-wide mb-2">
+          {content.subtitle}
+        </p>
+      )}
+      <h2 class="text-4xl md:text-3xl font-bold text-primary mb-6">
+        {content.title}
+      </h2>
+    </div>
+
+    <!-- Main Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+      <!-- Image -->
+      {content.image && (
+        <div class="relative rounded-lg overflow-hidden aspect-[4/3]">
+          <img
+            src={content.image}
+            alt={content.title}
+            class="w-full h-full object-cover"
+          />
+        </div>
+      )}
+
+      <!-- Text Content -->
+      <div>
+        <p class="text-lg text-on-surface-dim leading-relaxed mb-8">
+          {content.description}
+        </p>
+
+        <!-- Stats -->
+        {showStats && content.stats && content.stats.length > 0 && (
+          <div class="grid grid-cols-2 gap-6">
+            {content.stats.map((stat) => (
+              <div class="text-center lg:text-left">
+                <div class="text-3xl font-bold text-primary mb-1">
+                  {stat.value}
+                </div>
+                <div class="text-sm text-on-surface-dim">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+
+    <!-- Values/Principles -->
+    {showValues && content.values && content.values.length > 0 && (
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {content.values.map((value) => (
+          <Card
+            title={value.title}
+            description={value.description}
+          />
+        ))}
+      </div>
+    )}
+  </div>
+</section>

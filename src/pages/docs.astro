@@ -1,0 +1,527 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+---
+
+<Layout title="Documentation" description="Component documentation and usage examples">
+  <div class="max-w-4xl mx-auto">
+    <!-- Page Header -->
+    <header class="mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Documentation</h1>
+      <p class="text-xl text-on-surface-dim">
+        Interactive component showcase and customization guide
+      </p>
+    </header>
+
+    <!-- Interactive Hero Showcase -->
+    <section id="hero" class="mb-16">
+      <h2 class="text-3xl font-bold mb-6 border-b border-primary/20 pb-2">Hero Component</h2>
+      
+      <!-- Controls -->
+      <div class="card mb-8">
+        <h3 class="text-xl font-semibold mb-4">Interactive Demo</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
+          <div>
+            <label class="block font-semibold mb-2 text-sm md:text-base">Variant</label>
+            <div class="flex flex-col gap-2">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="variant" value="default" checked class="hero-control" />
+                <span class="text-sm">Default</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="variant" value="gradient" class="hero-control" />
+                <span class="text-sm">Gradient</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="variant" value="image-right" class="hero-control" />
+                <span class="text-sm">Image Right</span>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold mb-2 text-sm md:text-base">Alignment</label>
+            <div class="flex flex-col gap-2">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="alignment" value="center" checked class="hero-control" />
+                <span class="text-sm">Center</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="alignment" value="left" class="hero-control" />
+                <span class="text-sm">Left</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="fullViewport" class="hero-control" />
+            <span class="text-sm md:text-base font-semibold">Full Viewport</span>
+          </label>
+          
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="showSubtitle" class="hero-control" checked />
+            <span class="text-sm md:text-base font-semibold">Show Subtitle</span>
+          </label>
+          
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="showDescription" class="hero-control" checked />
+            <span class="text-sm md:text-base font-semibold">Show Description</span>
+          </label>
+          
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="showSecondaryCta" class="hero-control" checked />
+            <span class="text-sm md:text-base font-semibold">Show Secondary CTA</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Live Preview -->
+      <div class="border-2 border-primary/20 rounded-lg overflow-hidden mb-8">
+        <div class="bg-surface-dim px-4 py-2 border-b border-primary/20">
+          <span class="text-sm font-semibold">Live Preview</span>
+        </div>
+        <div id="heroPreview" class="bg-surface">
+          <!-- Hero will be rendered here -->
+        </div>
+      </div>
+
+      <!-- Code Output -->
+      <div class="card">
+        <h3 class="text-xl font-semibold mb-3">Generated Code</h3>
+        <pre id="heroCode" class="bg-surface-dim p-4 rounded overflow-x-auto text-sm"></pre>
+      </div>
+    </section>
+      
+      <div class="mb-8">
+        <h3 class="text-xl font-semibold mb-3">Props</h3>
+        <div class="card overflow-x-auto">
+          <table class="w-full text-xs md:text-sm">
+            <thead>
+              <tr class="border-b border-primary/20">
+                <th class="text-left py-2 px-2 md:px-4 font-semibold">Prop</th>
+                <th class="text-left py-2 px-2 md:px-4 font-semibold">Type</th>
+                <th class="text-left py-2 px-2 md:px-4 font-semibold hidden md:table-cell">Default</th>
+                <th class="text-left py-2 px-2 md:px-4 font-semibold">Description</th>
+              </tr>
+            </thead>
+            <tbody class="text-on-surface-dim">
+              <tr class="border-b border-primary/10">
+                <td class="py-2 px-2 md:px-4 font-mono text-primary text-xs">title</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">string</td>
+                <td class="py-2 px-2 md:px-4 hidden md:table-cell">-</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">Main heading</td>
+              </tr>
+              <tr class="border-b border-primary/10">
+                <td class="py-2 px-2 md:px-4 font-mono text-primary text-xs">subtitle</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">string</td>
+                <td class="py-2 px-2 md:px-4 hidden md:table-cell">-</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">Small text above</td>
+              </tr>
+              <tr class="border-b border-primary/10">
+                <td class="py-2 px-2 md:px-4 font-mono text-primary text-xs">description</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">string</td>
+                <td class="py-2 px-2 md:px-4 hidden md:table-cell">-</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">Paragraph</td>
+              </tr>
+              <tr class="border-b border-primary/10">
+                <td class="py-2 px-2 md:px-4 font-mono text-primary text-xs">primaryCta</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">object</td>
+                <td class="py-2 px-2 md:px-4 hidden md:table-cell">-</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">Primary button</td>
+              </tr>
+              <tr class="border-b border-primary/10">
+                <td class="py-2 px-2 md:px-4 font-mono text-primary text-xs">secondaryCta</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">object</td>
+                <td class="py-2 px-2 md:px-4 hidden md:table-cell">-</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">Secondary btn</td>
+              </tr>
+              <tr class="border-b border-primary/10">
+                <td class="py-2 px-2 md:px-4 font-mono text-primary text-xs">variant</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">enum</td>
+                <td class="py-2 px-2 md:px-4 hidden md:table-cell">'default'</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">Layout variant</td>
+              </tr>
+              <tr class="border-b border-primary/10">
+                <td class="py-2 px-2 md:px-4 font-mono text-primary text-xs">alignment</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">enum</td>
+                <td class="py-2 px-2 md:px-4 hidden md:table-cell">'center'</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">Content alignment</td>
+              </tr>
+              <tr class="border-b border-primary/10">
+                <td class="py-2 px-2 md:px-4 font-mono text-primary text-xs">fullViewport</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">boolean</td>
+                <td class="py-2 px-2 md:px-4 hidden md:table-cell">false</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">Fill viewport</td>
+              </tr>
+              <tr class="border-b border-primary/10">
+                <td class="py-2 px-2 md:px-4 font-mono text-primary text-xs">image</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">string</td>
+                <td class="py-2 px-2 md:px-4 hidden md:table-cell">-</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">Image URL</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2 md:px-4 font-mono text-primary text-xs">imageAlt</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">string</td>
+                <td class="py-2 px-2 md:px-4 hidden md:table-cell">''</td>
+                <td class="py-2 px-2 md:px-4 text-xs md:text-sm">Alt text</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <h3 class="text-xl font-semibold mb-3">Examples</h3>
+        
+        <div class="space-y-6">
+          <div>
+            <h4 class="font-semibold mb-2">Basic Hero</h4>
+            <pre class="bg-surface-dim p-4 rounded overflow-x-auto text-sm"><code>&lt;Hero 
+  title="Welcome to Your Site"
+  description="Build amazing things"
+  primaryCta=&#123;&#123; label: "Get Started", href: "/signup" &#125;&#125;
+/&gt;</code></pre>
+          </div>
+
+          <div>
+            <h4 class="font-semibold mb-2">Full Viewport with Gradient</h4>
+            <pre class="bg-surface-dim p-4 rounded overflow-x-auto text-sm"><code>&lt;Hero 
+  subtitle="New Feature"
+  title="Revolutionary Solution"
+  description="Transform your workflow"
+  variant="gradient"
+  fullViewport
+  primaryCta=&#123;&#123; label: "Learn More", href: "#about" &#125;&#125;
+  secondaryCta=&#123;&#123; label: "Contact", href: "#contact" &#125;&#125;
+/&gt;</code></pre>
+          </div>
+
+          <div>
+            <h4 class="font-semibold mb-2">Image Right Layout</h4>
+            <pre class="bg-surface-dim p-4 rounded overflow-x-auto text-sm"><code>&lt;Hero 
+  title="Your Business Name"
+  description="Professional services you can trust"
+  variant="image-right"
+  image="/hero-image.jpg"
+  imageAlt="Business showcase"
+  alignment="left"
+  primaryCta=&#123;&#123; label: "Book Now", href: "/booking" &#125;&#125;
+/&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Buttons -->
+    <section id="buttons" class="mb-16">
+      <h2 class="text-3xl font-bold mb-6 border-b border-primary/20 pb-2">Buttons</h2>
+      
+      <div class="mb-8">
+        <h3 class="text-xl font-semibold mb-4">Button Variants</h3>
+        <div class="flex flex-wrap gap-4 mb-6">
+          <button class="button-primary">Primary Button</button>
+          <button class="button-secondary">Secondary Button</button>
+          <button class="button-outline">Outline Button</button>
+          <button class="button-action">Action Button</button>
+        </div>
+        
+        <h4 class="font-semibold mb-2">Usage</h4>
+        <pre class="bg-surface-dim p-4 rounded overflow-x-auto text-sm"><code>&lt;button class="button-primary"&gt;Primary Button&lt;/button&gt;
+&lt;button class="button-secondary"&gt;Secondary Button&lt;/button&gt;
+&lt;button class="button-outline"&gt;Outline Button&lt;/button&gt;
+&lt;button class="button-action"&gt;Action Button&lt;/button&gt;
+
+&lt;!-- As links --&gt;
+&lt;a href="/signup" class="button-primary"&gt;Get Started&lt;/a&gt;</code></pre>
+      </div>
+    </section>
+
+    <!-- Navigation -->
+    <section id="navigation" class="mb-16">
+      <h2 class="text-3xl font-bold mb-6 border-b border-primary/20 pb-2">Navigation</h2>
+      
+      <div class="mb-8">
+        <h3 class="text-xl font-semibold mb-3">Configuration</h3>
+        <p class="text-on-surface-dim mb-4">
+          Edit <code class="bg-surface-dim px-2 py-1 rounded text-primary">src/data/navigation.ts</code> to customize navigation items.
+        </p>
+        
+        <pre class="bg-surface-dim p-4 rounded overflow-x-auto text-sm"><code>export const siteConfig: SiteConfig = &#123;
+  logo: "YourLogo",
+  logoHref: "/",
+  navItems: [
+    &#123; label: "Home", href: "/" &#125;,
+    &#123; label: "About", href: "#about" &#125;,
+    &#123; label: "Services", href: "#services" &#125;,
+  ],
+  actionItems: [
+    &#123; label: "(555) 123-4567", href: "tel:+15551234567" &#125;,
+    &#123; label: "Get Started", href: "/signup", variant: "outline" &#125;,
+  ]
+&#125;;</code></pre>
+      </div>
+
+      <div class="card">
+        <h4 class="font-semibold mb-2">NavItem Properties</h4>
+        <ul class="space-y-2 text-on-surface-dim">
+          <li><code class="text-primary">label</code> - Display text</li>
+          <li><code class="text-primary">href</code> - Link URL</li>
+          <li><code class="text-primary">variant</code> - Button style (optional): "primary", "secondary", "outline", "action"</li>
+          <li><code class="text-primary">external</code> - Opens in new tab (optional)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Theme System -->
+    <section id="theme" class="mb-16">
+      <h2 class="text-3xl font-bold mb-6 border-b border-primary/20 pb-2">Theme System</h2>
+      
+      <div class="mb-8">
+        <h3 class="text-xl font-semibold mb-3">Light/Dark Mode</h3>
+        <p class="text-on-surface-dim mb-4">
+          The template includes a theme toggle with localStorage persistence. Users' theme preference is saved and applied on page load to prevent flash.
+        </p>
+        
+        <div class="card">
+          <h4 class="font-semibold mb-2">Features</h4>
+          <ul class="space-y-2 text-on-surface-dim list-disc list-inside">
+            <li>Automatic system preference detection</li>
+            <li>Persistent user preference via localStorage</li>
+            <li>Smooth 300ms color transitions</li>
+            <li>No flash on page load</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-semibold mb-3">Using the Theme Toggle</h3>
+        <pre class="bg-surface-dim p-4 rounded overflow-x-auto text-sm"><code>import ThemeToggle from './ThemeToggle.astro';
+
+&lt;ThemeToggle /&gt;</code></pre>
+      </div>
+    </section>
+
+    <!-- Colors -->
+    <section id="colors" class="mb-16">
+      <h2 class="text-3xl font-bold mb-6 border-b border-primary/20 pb-2">Colors</h2>
+      
+      <p class="text-on-surface-dim mb-6">
+        Colors are defined as CSS custom properties in <code class="bg-surface-dim px-2 py-1 rounded text-primary">src/styles/global.css</code>.
+        See the <a href="/theme" class="text-primary hover:text-primary-hover underline">theme page</a> for a visual reference.
+      </p>
+
+      <div class="card">
+        <h3 class="text-xl font-semibold mb-4">Color Classes</h3>
+        <div class="grid md:grid-cols-2 gap-4 text-sm">
+          <div>
+            <h4 class="font-semibold mb-2">Text Colors</h4>
+            <ul class="space-y-1 text-on-surface-dim font-mono">
+              <li>text-primary</li>
+              <li>text-secondary</li>
+              <li>text-on-surface</li>
+              <li>text-on-surface-dim</li>
+              <li>text-error</li>
+              <li>text-success</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-2">Background Colors</h4>
+            <ul class="space-y-1 text-on-surface-dim font-mono">
+              <li>bg-surface</li>
+              <li>bg-surface-dim</li>
+              <li>bg-surface-bright</li>
+              <li>bg-primary</li>
+              <li>bg-secondary</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customization -->
+    <section id="customization" class="mb-16">
+      <h2 class="text-3xl font-bold mb-6 border-b border-primary/20 pb-2">Customization</h2>
+      
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-semibold mb-3">1. Update Site Config</h3>
+          <p class="text-on-surface-dim mb-2">
+            Edit <code class="bg-surface-dim px-2 py-1 rounded text-primary">src/data/navigation.ts</code>
+          </p>
+          <ul class="list-disc list-inside text-on-surface-dim space-y-1">
+            <li>Change logo text</li>
+            <li>Update navigation items</li>
+            <li>Modify action buttons</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold mb-3">2. Customize Colors</h3>
+          <p class="text-on-surface-dim mb-2">
+            Edit <code class="bg-surface-dim px-2 py-1 rounded text-primary">src/styles/global.css</code>
+          </p>
+          <ul class="list-disc list-inside text-on-surface-dim space-y-1">
+            <li>Modify CSS custom properties in <code class="text-primary">:root</code></li>
+            <li>Update light theme colors in <code class="text-primary">html[data-theme="light"]</code></li>
+            <li>All components will automatically use new colors</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold mb-3">3. Adjust Constants</h3>
+          <p class="text-on-surface-dim mb-2">
+            Edit <code class="bg-surface-dim px-2 py-1 rounded text-primary">src/data/constants.ts</code>
+          </p>
+          <ul class="list-disc list-inside text-on-surface-dim space-y-1">
+            <li>Update <code class="text-primary">NAV_HEIGHT</code> if you change nav size</li>
+            <li>Add other site-wide constants as needed</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-semibold mb-3">4. Add New Pages</h3>
+          <p class="text-on-surface-dim mb-2">
+            Create new files in <code class="bg-surface-dim px-2 py-1 rounded text-primary">src/pages/</code>
+          </p>
+          <pre class="bg-surface-dim p-4 rounded overflow-x-auto text-sm"><code>---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+---
+
+&lt;Layout title="About Us"&gt;
+  &lt;Hero 
+    title="About Our Company"
+    description="Learn more about who we are"
+  /&gt;
+  
+  &lt;!-- Your content --&gt;
+&lt;/Layout&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-primary/20 pt-8 pb-4 text-center text-on-surface-dim">
+      <p>For more help, check out the <a href="https://docs.astro.build" target="_blank" rel="noopener noreferrer" class="text-primary hover:text-primary-hover underline">Astro documentation</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // Interactive Hero Component Demo
+    const heroPreview = document.getElementById('heroPreview');
+    const heroCode = document.getElementById('heroCode');
+    const controls = document.querySelectorAll('.hero-control');
+
+    function getConfig() {
+      const variant = (document.querySelector('input[name="variant"]:checked') as HTMLInputElement)?.value || 'default';
+      const alignment = (document.querySelector('input[name="alignment"]:checked') as HTMLInputElement)?.value || 'center';
+      const fullViewport = (document.getElementById('fullViewport') as HTMLInputElement)?.checked || false;
+      const showSubtitle = (document.getElementById('showSubtitle') as HTMLInputElement)?.checked || false;
+      const showDescription = (document.getElementById('showDescription') as HTMLInputElement)?.checked || false;
+      const showSecondaryCta = (document.getElementById('showSecondaryCta') as HTMLInputElement)?.checked || false;
+
+      return {
+        variant,
+        alignment,
+        fullViewport,
+        showSubtitle,
+        showDescription,
+        showSecondaryCta
+      };
+    }
+
+    function generateHeroHTML(config: ReturnType<typeof getConfig>) {
+      const alignmentClass = config.alignment === 'center' ? 'text-center items-center' : 'text-left items-start';
+      const isImageRight = config.variant === 'image-right';
+      const hasGradient = config.variant === 'gradient';
+      const sectionClass = config.fullViewport 
+        ? 'relative overflow-hidden min-h-[calc(100svh-64px)] flex items-center -mt-[64px]'
+        : 'relative overflow-hidden py-20 md:py-32';
+
+      return `
+        <section class="${sectionClass}">
+          ${hasGradient ? '<div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-transparent pointer-events-none" aria-hidden="true"></div>' : ''}
+          
+          <div class="max-w-6xl mx-auto px-6 md:px-2 relative z-10">
+            <div class="flex flex-col ${isImageRight ? 'md:flex-row md:items-center gap-12' : 'gap-8'}">
+              <div class="flex flex-col ${alignmentClass} ${isImageRight ? 'md:w-1/2' : 'w-full'} gap-6">
+                ${config.showSubtitle ? '<span class="text-sm md:text-base font-semibold uppercase tracking-wider text-primary">Featured Section</span>' : ''}
+                
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                  Transform Your Business
+                </h1>
+                
+                ${config.showDescription ? '<p class="text-lg md:text-xl text-on-surface-dim max-w-2xl">Build amazing experiences with our modern, flexible starter template designed for rapid deployment.</p>' : ''}
+                
+                <div class="flex flex-wrap gap-4 ${config.alignment === 'center' ? 'justify-center' : ''}">
+                  <a href="#" class="button-primary">Get Started</a>
+                  ${config.showSecondaryCta ? '<a href="#" class="button-outline">Learn More</a>' : ''}
+                </div>
+              </div>
+              
+              ${isImageRight ? '<div class="md:w-1/2"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="Team collaboration" class="w-full h-auto rounded-lg shadow-lg" /></div>' : ''}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function generateCode(config: ReturnType<typeof getConfig>) {
+      const props = [];
+      
+      if (config.showSubtitle) {
+        props.push('  subtitle="Featured Section"');
+      }
+      
+      props.push('  title="Transform Your Business"');
+      
+      if (config.showDescription) {
+        props.push('  description="Build amazing experiences with our modern, flexible starter template designed for rapid deployment."');
+      }
+      
+      if (config.variant !== 'default') {
+        props.push(`  variant="${config.variant}"`);
+      }
+      
+      if (config.alignment !== 'center') {
+        props.push(`  alignment="${config.alignment}"`);
+      }
+      
+      if (config.fullViewport) {
+        props.push('  fullViewport');
+      }
+      
+      if (config.variant === 'image-right') {
+        props.push('  image="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"');
+        props.push('  imageAlt="Team collaboration"');
+      }
+      
+      props.push('  primaryCta={{ label: "Get Started", href: "#" }}');
+      
+      if (config.showSecondaryCta) {
+        props.push('  secondaryCta={{ label: "Learn More", href: "#" }}');
+      }
+
+      return `<Hero\n${props.join('\n')}\n/>`;
+    }
+
+    function updatePreview() {
+      const config = getConfig();
+      if (heroPreview && heroCode) {
+        heroPreview.innerHTML = generateHeroHTML(config);
+        heroCode.textContent = generateCode(config);
+      }
+    }
+
+    // Initialize
+    updatePreview();
+
+    // Listen to all control changes
+    controls.forEach(control => {
+      control.addEventListener('change', updatePreview);
+    });
+  </script>
+</Layout>

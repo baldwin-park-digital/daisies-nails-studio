@@ -1,0 +1,86 @@
+---
+export interface AccordionItem {
+  id: string;
+  title: string;
+  content: string;
+}
+
+interface Props {
+  items: AccordionItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="space-y-4">
+  {items.map((item) => (
+    <div class="accordion-item border border-primary/20 rounded-lg overflow-hidden">
+      <button
+        type="button"
+        class="accordion-button w-full text-left px-6 py-4 flex justify-between items-center bg-surface-dim hover:bg-surface-bright transition-colors"
+        aria-expanded="false"
+        data-accordion-id={item.id}
+      >
+        <span class="font-semibold text-primary pr-4">{item.title}</span>
+        <svg
+          class="accordion-icon w-5 h-5 text-primary flex-shrink-0"
+          style="transition: transform 300ms ease-in-out;"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+      <div
+        class="accordion-content overflow-hidden"
+        style="max-height: 0; transition: max-height 300ms ease-in-out;"
+        data-accordion-id={item.id}
+      >
+        <div class="px-6 py-4 text-on-surface-dim leading-relaxed">
+          {item.content}
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  // Accordion functionality
+  document.querySelectorAll('.accordion-button').forEach((button) => {
+    button.addEventListener('click', () => {
+      const accordionId = button.getAttribute('data-accordion-id');
+      const content = document.querySelector(`.accordion-content[data-accordion-id="${accordionId}"]`) as HTMLElement;
+      const icon = button.querySelector('.accordion-icon') as SVGElement;
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      if (isExpanded) {
+        // Close
+        content.style.maxHeight = '0';
+        button.setAttribute('aria-expanded', 'false');
+        icon.style.transform = 'rotate(0deg)';
+      } else {
+        // Close all others (accordion behavior - only one open at a time)
+        document.querySelectorAll('.accordion-button').forEach((otherButton) => {
+          const otherId = otherButton.getAttribute('data-accordion-id');
+          const otherContent = document.querySelector(`.accordion-content[data-accordion-id="${otherId}"]`) as HTMLElement;
+          const otherIcon = otherButton.querySelector('.accordion-icon') as SVGElement;
+          
+          otherContent.style.maxHeight = '0';
+          otherButton.setAttribute('aria-expanded', 'false');
+          otherIcon.style.transform = 'rotate(0deg)';
+        });
+
+        // Open this one
+        content.style.maxHeight = content.scrollHeight + 'px';
+        button.setAttribute('aria-expanded', 'true');
+        icon.style.transform = 'rotate(180deg)';
+      }
+    });
+  });
+</script>

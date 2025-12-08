@@ -1,0 +1,145 @@
+---
+import { footerFullConfig } from "../data/footer";
+import type { SiteConfig } from "../data/site";
+import type { FooterConfig } from "../data/footer";
+import Button from "./Button.astro";
+
+interface Props {
+  config?: typeof footerFullConfig;
+}
+
+const { config = footerFullConfig } = Astro.props;
+---
+
+<footer class="bg-surface border-t border-primary/20 mt-24">
+  <div class="max-w-6xl mx-auto px-6 md:px-2">
+    {/* Main footer content */}
+    <div
+      class="py-12 md:py-8 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-8 md:gap-6"
+    >
+      {/* Company info section */}
+      <div class="col-span-1 md:col-span-1">
+        <h3 class="text-lg font-bold text-primary mb-4">
+          {config.company.name}
+        </h3>
+        <p class="text-sm text-on-surface-dim leading-relaxed mb-6">
+          {config.company.description}
+        </p>
+
+        {/* Social links */}
+        {
+          config.social.length > 0 && (
+            <div class="flex gap-3">
+              {config.social.map((social) => (
+                <Button
+                  as="a"
+                  href={social.href}
+                  variant="outline"
+                  size="sm"
+                  external
+                  class="w-8 h-8 p-0 rounded-full bg-primary/10 hover:bg-primary/20 border-0"
+                  icon={social.icon}
+                >
+                  <span class="sr-only">{social.label}</span>
+                </Button>
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      {/* Footer sections */}
+      {
+        config.sections.map((section) => (
+          <div class="col-span-1">
+            <h4 class="text-sm font-bold text-primary uppercase tracking-wide mb-4">
+              {section.title}
+            </h4>
+            <ul class="space-y-2">
+              {section.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noopener noreferrer" : undefined}
+                    class="text-sm text-on-surface-dim hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+
+      {/* Contact section */}
+      <div class="col-span-1">
+        <h4 class="text-sm font-bold text-primary uppercase tracking-wide mb-4">
+          Contact
+        </h4>
+        <ul class="space-y-3 text-sm">
+          {
+            config.contact.email && (
+              <li>
+                <a
+                  href={`mailto:${config.contact.email}`}
+                  class="text-on-surface-dim hover:text-primary transition-colors break-all"
+                >
+                  {config.contact.email}
+                </a>
+              </li>
+            )
+          }
+          {
+            config.contact.phone && (
+              <li>
+                <a
+                  href={`tel:${config.contact.phone}`}
+                  class="text-on-surface-dim hover:text-primary transition-colors"
+                >
+                  {config.contact.phone}
+                </a>
+              </li>
+            )
+          }
+          {
+            config.contact.address && (
+              <li class="text-on-surface-dim">{config.contact.address}</li>
+            )
+          }
+        </ul>
+      </div>
+    </div>
+
+    {/* Bottom section - Legal and Copyright */}
+    <div
+      class="py-8 md:py-6 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-4"
+    >
+      <p class="text-xs text-on-surface-dim">
+        {config.copyright}
+      </p>
+
+      {/* Legal links */}
+      {
+        config.legal.length > 0 && (
+          <div class="flex flex-wrap justify-center md:justify-end gap-4 md:gap-6">
+            {config.legal.map((item, index) => (
+              <>
+                <a
+                  href={item.href}
+                  class="text-xs text-on-surface-dim hover:text-primary transition-colors"
+                >
+                  {item.label}
+                </a>
+                {index < config.legal.length - 1 && (
+                  <div class="text-on-surface-dim/30">•</div>
+                )}
+              </>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</footer>
