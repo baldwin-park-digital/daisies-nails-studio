@@ -59,12 +59,14 @@ const { title, description = "Welcome to our static site" } = Astro.props;
     </noscript>
     <script is:inline>
       // Dynamically load GA script client-side
-      const gaScript = document.createElement('script');
-      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-11NLEWTL0B';
+      const gaScript = document.createElement("script");
+      gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-11NLEWTL0B";
       gaScript.async = true;
-      gaScript.onload = function() {
+      gaScript.onload = function () {
         window.dataLayer = window.dataLayer || [];
-        function gtag(){window.dataLayer.push(arguments);}
+        function gtag() {
+          window.dataLayer.push(arguments);
+        }
         window.gtag = gtag;
         // Helper to get consent cookie
         function getCookie(name) {
@@ -73,41 +75,36 @@ const { title, description = "Welcome to our static site" } = Astro.props;
           if (parts.length === 2) {
             const part = parts.pop();
             if (part !== undefined) {
-              return part.split(';').shift();
+              return part.split(";").shift();
             }
           }
           return null;
         }
-        // Set consent based on cookie
-        const consent = getCookie('daisies_analytics_consent');
-        if (consent === 'yes') {
-          gtag('consent', 'default', {
-            ad_storage: 'granted',
-            analytics_storage: 'granted',
-            ad_user_data: 'granted',
-            ad_personalization: 'granted'
+        // Always set default as denied first
+        gtag("consent", "default", {
+          ad_storage: "denied",
+          analytics_storage: "denied",
+          ad_user_data: "denied",
+          ad_personalization: "denied",
+        });
+        // Then check cookie and send update if needed
+        const consent = getCookie("daisies_analytics_consent");
+        if (consent === "yes") {
+          gtag("consent", "update", {
+            ad_storage: "granted",
+            analytics_storage: "granted",
+            ad_user_data: "granted",
+            ad_personalization: "granted",
           });
-          console.log('GA: consent granted from cookie');
-        } else if (consent === 'no') {
-          gtag('consent', 'default', {
-            ad_storage: 'denied',
-            analytics_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied'
-          });
-          console.log('GA: consent denied from cookie');
+          console.log("GA: consent granted from cookie");
+        } else if (consent === "no") {
+          console.log("GA: consent denied from cookie");
         } else {
-          gtag('consent', 'default', {
-            ad_storage: 'denied',
-            analytics_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied'
-          });
-          console.log('GA: consent default denied');
+          console.log("GA: consent default denied");
         }
-        gtag('js', new Date());
-        gtag('config', 'G-11NLEWTL0B');
-        console.log('GA script loaded and gtag initialized');
+        gtag("js", new Date());
+        gtag("config", "G-11NLEWTL0B");
+        console.log("GA script loaded and gtag initialized");
       };
       document.head.appendChild(gaScript);
     </script>
