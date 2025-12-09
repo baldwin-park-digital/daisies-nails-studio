@@ -20,12 +20,14 @@ const { title, description = "Welcome to our static site" } = Astro.props;
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title || 'Daisies Nails Studio'}</title>
+    <title>{title || "Daisies Nails Studio"}</title>
     <script is:inline>
       // Apply theme from localStorage or system preference immediately to prevent flash
       let theme = localStorage.getItem("theme");
       if (!theme) {
-        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
       }
       document.documentElement.setAttribute("data-theme", theme);
     </script>
@@ -36,11 +38,39 @@ const { title, description = "Welcome to our static site" } = Astro.props;
       rel="stylesheet"
     />
 
-      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" />
-      <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-      <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-      </noscript>
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VYS6MHK4KC"
+    ></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VYS6MHK4KC"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        //@ts-ignore
+        dataLayer.push(arguments);
+      }
+      //@ts-ignore
+      gtag("js", new Date());
+      //@ts-ignore
+      gtag("config", "G-VYS6MHK4KC");
+    </script>
   </head>
   <body class="surface text-on-surface font-montserrat">
     <Nav />
