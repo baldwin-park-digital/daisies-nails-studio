@@ -36,7 +36,6 @@ export const footerConfig: FooterConfig = {
   ],
   legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },
-    { label: "Do Not Sell or Share My Personal Information", href: "/do-not-sell" },
   ],
   copyright: `© ${new Date().getFullYear()} ${globalSiteConfig.company.name}. All rights reserved.`,
 };

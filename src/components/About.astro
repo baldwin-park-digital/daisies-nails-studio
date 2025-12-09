@@ -59,8 +59,11 @@ const variantClasses = {
         )
       }
       <!-- Text Content -->
-      {
-        showStats && content.stats && content.stats.length > 0 && (
+      <div>
+        {content.description && (
+          <p class="text-lg text-on-surface mb-8">{content.description}</p>
+        )}
+        {showStats && content.stats && content.stats.length > 0 && (
           <div class="grid grid-cols-2 gap-8 mt-8">
             {content.stats.map((stat) => (
               <div class="text-center lg:text-left">
@@ -71,8 +74,8 @@ const variantClasses = {
               </div>
             ))}
           </div>
-        )
-      }
+        )}
+      </div>
     </div>
   </div>
 </section>

@@ -1,14 +1,30 @@
-<article class="max-w-3xl mx-auto p-8 bg-surface-dim rounded-lg shadow-md text-on-surface-dim">
-  <h1 class="text-3xl font-bold mb-6">Privacy Policy</h1>
-  <p class="mb-4">Daisies Nail Studio values your privacy. This policy explains how we use cookies and handle your personal information.</p>
-  <h2 class="text-xl font-semibold mt-6 mb-2">Cookies</h2>
-  <p class="mb-4">We use cookies to enhance your experience and analyze site traffic. You may accept or decline cookies using our cookie banner. No personal information is stored in cookies.</p>
-  <h2 class="text-xl font-semibold mt-6 mb-2">Google Analytics</h2>
-  <p class="mb-4">If you accept cookies, we use Google Analytics to collect anonymous usage data. This helps us improve our website. No personally identifiable information is collected.</p>
-  <h2 class="text-xl font-semibold mt-6 mb-2">Contact Information</h2>
-  <p class="mb-4">If you have questions about our privacy practices, please contact us at <a href="mailto:daisiesnailsstudio@gmail.com" class="underline">daisiesnailsstudio@gmail.com</a>.</p>
-  <h2 class="text-xl font-semibold mt-6 mb-2">Your Rights</h2>
-  <p class="mb-4">You may request to view, update, or delete your personal information by contacting us. We comply with applicable privacy laws.</p>
-  <h2 class="text-xl font-semibold mt-6 mb-2">Updates</h2>
-  <p>We may update this policy from time to time. Please check this page for the latest information.</p>
-</article>
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Privacy Policy">
+  <article class="max-w-3xl mx-auto bg-surface rounded-lg text-on-surface-dim">
+    <h1 class="text-3xl md:text-4xl font-bold mb-6 text-primary text-center">Privacy Policy</h1>
+    <p class="mb-6 text-base md:text-lg text-center">Daisies Nail Studio values your privacy. This policy explains how we use cookies and handle your personal information.</p>
+    <section class="mb-8">
+      <h2 class="text-lg md:text-xl font-semibold mt-6 mb-2 text-on-surface">Cookies</h2>
+      <p class="mb-4">We use cookies to enhance your experience and analyze site traffic. You may accept or decline cookies using our cookie banner. No personal information is stored in cookies.</p>
+    </section>
+    <section class="mb-8">
+      <h2 class="text-lg md:text-xl font-semibold mt-6 mb-2 text-on-surface">Google Analytics</h2>
+      <p class="mb-4">If you accept cookies, we use Google Analytics to collect anonymous usage data. This helps us improve our website. No personally identifiable information is collected.</p>
+    </section>
+    <section class="mb-8">
+      <h2 class="text-lg md:text-xl font-semibold mt-6 mb-2 text-on-surface">Contact Information</h2>
+      <p class="mb-4">If you have questions about our privacy practices, please contact us at <a href="mailto:daisiesnailsstudio@gmail.com" class="underline text-primary hover:text-primary-dark">daisiesnailsstudio@gmail.com</a>.</p>
+    </section>
+    <section class="mb-8">
+      <h2 class="text-lg md:text-xl font-semibold mt-6 mb-2 text-on-surface">Your Rights</h2>
+      <p class="mb-4">You may request to view, update, or delete your personal information by contacting us. We comply with applicable privacy laws.</p>
+    </section>
+    <section>
+      <h2 class="text-lg md:text-xl font-semibold mt-6 mb-2 text-on-surface">Updates</h2>
+      <p>We may update this policy from time to time. Please check this page for the latest information.</p>
+    </section>
+  </article>
+</Layout>

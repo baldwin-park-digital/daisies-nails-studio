@@ -11,11 +11,18 @@ import About from "../components/About.astro";
 import Contact from "../components/Contact.astro";
 ---
 
-<Layout title="Daisies Nails Studio" description="Luxury nail artistry and spa treatments designed for modern elegance.">
+<Layout
+  title="Daisies Nails Studio"
+  description="Luxury nail artistry and spa treatments designed for modern elegance."
+>
   <Hero
     title="Treat Yourself to Perfect Nails"
     description="From classic manicures to dazzling designs, your nails will shine."
-    primaryCta={{ label: "BOOK MY APPOINTMENT", href: "https://daisiesnailsstudio.getrichbooking.com/", external: true }}
+    primaryCta={{
+      label: "BOOK MY APPOINTMENT",
+      href: "https://daisiesnailsstudio.getrichbooking.com/",
+      external: true,
+    }}
     image={heroNailsImg}
     imageAlt="red painted nails background"
     fullViewport
@@ -69,8 +76,20 @@ import Contact from "../components/Contact.astro";
 
   <Gallery
     title="Our Work"
-    description="Explore our portfolio of beautiful projects. See more on our Instagram!"
+    description="Explore our portfolio of beautiful projects."
   />
+  <div class="flex justify-center mb-5">
+    <a
+      href="https://www.instagram.com/daisiesnailsstudio/"
+      class="button px-8 py-4 text-lg font-bold rounded hover:scale-105 transition-transform"
+      target="_blank"
+      rel="noopener noreferrer"
+      data-element="index-instagram-link"
+    >
+      View Our Full Gallery On Instagram
+    </a>
+  </div>
+
   <div class="flex justify-center mb-5">
     <a
       href="https://daisiesnailsstudio.getrichbooking.com/"
@@ -79,19 +98,23 @@ import Contact from "../components/Contact.astro";
       rel="noopener noreferrer"
       data-element="index-book-link"
     >
-      Get My Nails Done
+      Get My Appointment Now
     </a>
   </div>
   <Testimonials />
 
   <FAQ />
-  
+
   <Contact showMap={true} />
 
   <CTA
     title="Don't Miss Out!"
     description="Bookings fill up fast. Treat yourself to the ultimate care experience."
-    primaryCta={{ label: "Plan My Appointment", href: "https://daisiesnailsstudio.getrichbooking.com/", external: true }}
+    primaryCta={{
+      label: "Plan My Appointment",
+      href: "https://daisiesnailsstudio.getrichbooking.com/",
+      external: true,
+    }}
     variant="gradient"
   />
 </Layout>

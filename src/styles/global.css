@@ -22,9 +22,9 @@ html {
   --color-primary-active: #B08A26;
   --color-on-primary: #1a1a1a;
 
-  --color-secondary: #ffcee3; /* Pastel pink */
-  --color-secondary-hover: #FFC4DC;
-  --color-secondary-active: #FFB2D0;
+  --color-secondary: #D4AF37;
+  --color-secondary-hover: #C19A2E;
+  --color-secondary-active: #B08A26;
   --color-on-secondary: #1a1a1a;
 
   --color-surface: #1a1a1a;
@@ -57,9 +57,9 @@ html[data-theme="light"] {
   --color-primary-active: #B08A26;
   --color-on-primary: #D4AF37;
 
-  --color-secondary: #e05d8b; /* Slightly deeper pastel pink for light mode */
-  --color-secondary-hover: #FFA4C4;
-  --color-secondary-active: #FF92B8;
+  --color-secondary: #ffda62; /* Slightly deeper pastel pink for light mode */
+  --color-secondary-hover: #ffca39;
+  --color-secondary-active: #ffca39;
   --color-on-secondary: #1a1a1a;
 
   --color-surface: #FDFBF7; /* Warm off-white */
