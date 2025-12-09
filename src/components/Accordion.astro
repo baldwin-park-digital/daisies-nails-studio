@@ -20,6 +20,7 @@ const { items } = Astro.props;
         class="accordion-button w-full text-left px-6 py-4 flex justify-between items-center bg-surface-dim hover:bg-surface-bright transition-colors"
         aria-expanded="false"
         data-accordion-id={item.id}
+        data-element="accordion-toggle"
       >
         <span class="font-semibold text-primary pr-4">{item.title}</span>
         <svg
@@ -57,9 +58,9 @@ const { items } = Astro.props;
       const accordionId = button.getAttribute('data-accordion-id');
       const content = document.querySelector(`.accordion-content[data-accordion-id="${accordionId}"]`) as HTMLElement;
       const icon = button.querySelector('.accordion-icon') as SVGElement;
-      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      const wasExpanded = button.getAttribute('aria-expanded') === 'true';
 
-      if (isExpanded) {
+      if (wasExpanded) {
         // Close
         content.style.maxHeight = '0';
         button.setAttribute('aria-expanded', 'false');
@@ -70,7 +71,6 @@ const { items } = Astro.props;
           const otherId = otherButton.getAttribute('data-accordion-id');
           const otherContent = document.querySelector(`.accordion-content[data-accordion-id="${otherId}"]`) as HTMLElement;
           const otherIcon = otherButton.querySelector('.accordion-icon') as SVGElement;
-          
           otherContent.style.maxHeight = '0';
           otherButton.setAttribute('aria-expanded', 'false');
           otherIcon.style.transform = 'rotate(0deg)';
@@ -80,6 +80,17 @@ const { items } = Astro.props;
         content.style.maxHeight = content.scrollHeight + 'px';
         button.setAttribute('aria-expanded', 'true');
         icon.style.transform = 'rotate(180deg)';
+        // Only send analytics event if aria-expanded was false before click (i.e., only on open)
+        if (button.getAttribute('aria-expanded') === 'true' && button.hasAttribute('data-element')) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'accordion_open',
+            accordionId,
+            elementDetail: button.getAttribute('data-element'),
+            page: window.location.pathname === '/' || window.location.pathname === '' ? 'home page' : window.location.pathname,
+            ignoreExpanded: false
+          });
+        }
       }
     });
   });

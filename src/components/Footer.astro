@@ -39,6 +39,7 @@ const { config = footerFullConfig } = Astro.props;
                   class="w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 hover:bg-primary/20 transition-colors"
                   aria-label={social.label}
                   title={social.label}
+                  data-element="footer-social-link"
                 >
                   <span class="sr-only">{social.label}</span>
                   <SvgIcon icon={social.label} size={24} />
@@ -64,6 +65,7 @@ const { config = footerFullConfig } = Astro.props;
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noopener noreferrer" : undefined}
                     class="text-sm text-on-surface-dim hover:text-primary transition-colors"
+                    data-element="footer-section-link"
                   >
                     {link.label}
                   </a>
@@ -86,6 +88,7 @@ const { config = footerFullConfig } = Astro.props;
                 <a
                   href={`mailto:${config.contact.email}`}
                   class="text-on-surface-dim hover:text-primary transition-colors break-all"
+                  data-element="footer-contact-email"
                 >
                   {config.contact.email}
                 </a>
@@ -98,6 +101,7 @@ const { config = footerFullConfig } = Astro.props;
                 <a
                   href={`tel:${config.contact.phone}`}
                   class="text-on-surface-dim hover:text-primary transition-colors"
+                  data-element="footer-contact-phone"
                 >
                   {config.contact.phone}
                 </a>
@@ -130,6 +134,7 @@ const { config = footerFullConfig } = Astro.props;
                 <a
                   href={item.href}
                   class="text-xs text-on-surface-dim hover:text-primary transition-colors"
+                  data-element="footer-legal-link"
                 >
                   {item.label}
                 </a>

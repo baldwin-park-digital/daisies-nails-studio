@@ -1,6 +1,7 @@
 ---
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import AnalyticsTracker from "../components/AnalyticsTracker.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -78,5 +79,6 @@ const { title, description = "Welcome to our static site" } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <AnalyticsTracker />
   </body>
 </html>

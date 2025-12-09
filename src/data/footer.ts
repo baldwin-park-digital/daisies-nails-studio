@@ -26,7 +26,7 @@ export const footerConfig: FooterConfig = {
     {
       title: "We're Hiring!",
       links: [
-        { label: "Nail Technicians, DM your portfolio to us on Instagram.", href: "https://www.instagram.com/daisiesnailsstudio" },
+        { label: "Nail Technicians, DM your portfolio to us on Instagram.", href: "https://www.instagram.com/daisiesnailsstudio", external: true},
       ],
     },
     {

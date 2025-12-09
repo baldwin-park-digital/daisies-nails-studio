@@ -80,7 +80,7 @@ const spanAttrs = as === "span" ? {
 const finalAttrs = { ...buttonAttrs, ...linkAttrs, ...spanAttrs };
 ---
 
-<Component {...finalAttrs}>
+<Component {...finalAttrs} {...Astro.props}>
   {icon && <span class="text-base">{icon}</span>}
   <span>{loading ? "Loading..." : <slot />}</span>
   {iconEnd && <span class="text-base">{iconEnd}</span>}

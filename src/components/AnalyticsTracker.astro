@@ -1,0 +1,71 @@
+---
+// No props needed
+---
+<script>
+  // Helper to get all data-* attributes as an object
+  function getDataAttributes(element) {
+    const data = {};
+    if (element && element.dataset) {
+      for (const key in element.dataset) {
+        data[key] = element.dataset[key];
+      }
+    }
+    return data;
+  }
+
+  // Get page context
+  function getPageName() {
+    const path = window.location.pathname;
+    return path === '/' || path === '' ? 'home page' : path;
+  }
+
+  // Send page view event on initial load
+  function sendPageViewEvent() {
+    const eventData = {
+      event: 'page_view',
+      page: getPageName(),
+      timestamp: Date.now(),
+    };
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(eventData);
+    // console.log('[Analytics Sent] Page view:', eventData);
+  }
+
+  // Fire page view event when script loads
+  sendPageViewEvent();
+
+  document.addEventListener('click', function(event) {
+    const anchor = event.target.closest('a[data-element]');
+    if (anchor) {
+      const eventData = {
+        event: 'link_click',
+        href: anchor.href,
+        text: anchor.textContent?.trim(),
+        page: getPageName(),
+        dataAttributes: getDataAttributes(anchor),
+        elementDetail: anchor.getAttribute('data-element')
+      };
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(eventData);
+      // console.log('[Analytics Sent] Link clicked:', eventData);
+      return;
+    }
+    const button = event.target.closest('button[data-element]');
+    if (button) {
+      // Only send event for accordion-toggle if not already expanded
+      if (button.getAttribute('data-element') === 'accordion-toggle' && button.getAttribute('aria-expanded') !== 'true') {
+        return;
+      }
+      const eventData = {
+        event: 'button_click',
+        text: button.textContent?.trim(),
+        page: getPageName(),
+        dataAttributes: getDataAttributes(button),
+        elementDetail: button.getAttribute('data-element')
+      };
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(eventData);
+      // console.log('[Analytics Sent] Button clicked:', eventData);
+    }
+  });
+</script>

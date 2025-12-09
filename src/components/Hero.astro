@@ -95,11 +95,11 @@ const isImageRight = variant === 'image-right';
                 variant="primary"
                 external={primaryCta.external}
                 size="lg"
+                data-element="hero-primary-cta"
               >
                 {primaryCta.label}
               </Button>
             )}
-            
             {secondaryCta && (
               <Button
                 as="a"
@@ -107,6 +107,7 @@ const isImageRight = variant === 'image-right';
                 variant="outline"
                 external={secondaryCta.external}
                 size="lg"
+                data-element="hero-secondary-cta"
               >
                 {secondaryCta.label}
               </Button>

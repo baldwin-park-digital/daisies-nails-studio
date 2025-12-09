@@ -42,9 +42,7 @@ const getLinkClasses = (variant?: string) => {
 };
 ---
 
-<nav
-  class="sticky top-0 z-100 bg-linear-to-r from-surface to-surface-dim"
->
+<nav class="sticky top-0 z-100 bg-linear-to-r from-surface to-surface-dim">
   <div
     class="max-w-6xl mx-auto px-6 md:px-2 md:py-0 py-3 flex justify-between items-center"
   >
@@ -210,6 +208,7 @@ const getLinkClasses = (variant?: string) => {
                       style={`transition-delay: ${delays[navItems.length + index]}ms;`}
                     >
                       <Button
+                        data-element="nav-action-item"
                         as="a"
                         href={item.href}
                         variant={
@@ -237,7 +236,7 @@ const getLinkClasses = (variant?: string) => {
   <script>
     const hamburger = document.getElementById("hamburger") as HTMLButtonElement;
     const mobileMenu = document.getElementById(
-      "mobileMenu",
+      "mobileMenu"
     ) as HTMLUListElement;
     const backdrop = document.getElementById("backdrop") as HTMLDivElement;
     const line1 = document.getElementById("line1") as HTMLSpanElement;
@@ -250,7 +249,7 @@ const getLinkClasses = (variant?: string) => {
 
       // Get the mobile submenu
       const submenu = wrapper.querySelector(
-        ".submenu-mobile",
+        ".submenu-mobile"
       ) as HTMLElement | null;
       if (!submenu) return;
 
@@ -273,7 +272,7 @@ const getLinkClasses = (variant?: string) => {
                 if (otherButton) {
                   otherButton.setAttribute("aria-expanded", "false");
                   const arrow = otherButton.querySelector(
-                    "[data-submenu-arrow]",
+                    "[data-submenu-arrow]"
                   );
                   if (arrow) arrow.classList.remove("rotate-180");
                 }
@@ -296,13 +295,8 @@ const getLinkClasses = (variant?: string) => {
 
         (button as HTMLButtonElement).setAttribute(
           "aria-expanded",
-          String(newOpen),
+          String(newOpen)
         );
-        console.log("Toggled submenu", {
-          newOpen,
-          scrollHeight: submenu.scrollHeight,
-          maxHeight: submenu.style.maxHeight,
-        });
       }
     }
 
@@ -400,7 +394,7 @@ const getLinkClasses = (variant?: string) => {
     const handleKeyboardInput = (e: Event) => {
       const keyEvent = e as KeyboardEvent;
       const button = (keyEvent.target as HTMLElement).closest(
-        "button[aria-haspopup]",
+        "button[aria-haspopup]"
       );
       if (button) {
         if (keyEvent.key === "Enter" || keyEvent.key === " ") {
@@ -462,9 +456,13 @@ const getLinkClasses = (variant?: string) => {
     window.addEventListener("resize", handleResize);
 
     // Close menu after clicking a nav link (mobile only)
-    mobileMenu.addEventListener("click", function(e) {
+    mobileMenu.addEventListener("click", function (e) {
       const target = e.target as HTMLElement;
-      if (window.innerWidth < 768 && target.tagName === "A" && target.getAttribute("href")) {
+      if (
+        window.innerWidth < 768 &&
+        target.tagName === "A" &&
+        target.getAttribute("href")
+      ) {
         closeMenu();
       }
     });

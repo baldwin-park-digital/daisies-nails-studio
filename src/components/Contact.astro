@@ -131,6 +131,7 @@ const variantClasses = {
                     rel="noopener noreferrer"
                     class="w-10 h-10 flex items-center justify-center bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-on-primary transition-colors"
                     aria-label={social.label}
+                    data-element={`contact-social-${social.label.toLowerCase()}`}
                   >
                     <SvgIcon icon={social.label} size={24} />
                   </a>
