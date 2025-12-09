@@ -52,7 +52,7 @@ html {
 
 /* Light theme color variables */
 html[data-theme="light"] {
-  --color-primary: #120f05; /* Sophisticated gold */
+  --color-primary: #120f05;
   --color-primary-hover: #000000;
   --color-primary-active: #B08A26;
   --color-on-primary: #D4AF37;
@@ -216,12 +216,4 @@ body, body * {
     border-color: var(--color-divider);
   }
 
-  /* Typography Utilities */
-  .font-script {
-    font-family: var(--font-great-vibes);
-  }
-
-  .font-montserrat {
-    font-family: var(--font-montserrat);
-  }
 }

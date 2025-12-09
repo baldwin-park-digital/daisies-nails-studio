@@ -63,7 +63,7 @@ const variantClasses = {
         showStats && content.stats && content.stats.length > 0 && (
           <div class="grid grid-cols-2 gap-8 mt-8">
             {content.stats.map((stat) => (
-              <div class="text-center lg:text-left" key={stat.label}>
+              <div class="text-center lg:text-left">
                 <div class="text-3xl font-bold text-primary mb-1">
                   {stat.value}
                 </div>
