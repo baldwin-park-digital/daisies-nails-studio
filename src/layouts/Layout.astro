@@ -22,8 +22,11 @@ const { title, description = "Welcome to our static site" } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title || 'Daisies Nails Studio'}</title>
     <script is:inline>
-      // Apply theme from localStorage immediately to prevent flash
-      const theme = localStorage.getItem("theme") || "dark";
+      // Apply theme from localStorage or system preference immediately to prevent flash
+      let theme = localStorage.getItem("theme");
+      if (!theme) {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
       document.documentElement.setAttribute("data-theme", theme);
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
