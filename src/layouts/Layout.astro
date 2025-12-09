@@ -60,7 +60,7 @@ const { title, description = "Welcome to our static site" } = Astro.props;
     <script is:inline>
       // Dynamically load GA script client-side
       const gaScript = document.createElement("script");
-      gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-11NLEWTL0B";
+      gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-DPJVCJGFRJ";
       gaScript.async = true;
       gaScript.onload = function () {
         window.dataLayer = window.dataLayer || [];
@@ -103,7 +103,7 @@ const { title, description = "Welcome to our static site" } = Astro.props;
           console.log("GA: consent default denied");
         }
         gtag("js", new Date());
-        gtag("config", "G-11NLEWTL0B");
+        gtag("config", "G-DPJVCJGFRJ");
         console.log("GA script loaded and gtag initialized");
       };
       document.head.appendChild(gaScript);
