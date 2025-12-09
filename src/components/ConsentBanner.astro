@@ -41,23 +41,31 @@
     window.dispatchEvent(new Event("analyticsConsentChanged"));
 
     // Consent Mode v2: update consent state
-    if (window.gtag) {
-      if (answer === 'yes') {
-        window.gtag('consent', 'update', {
-          ad_storage: 'granted',
-          analytics_storage: 'granted',
-          ad_user_data: 'granted',
-          ad_personalization: 'granted'
-        });
+    function updateConsent() {
+      if (window.gtag) {
+        console.log("window.gtag is available");
+        if (answer === 'yes') {
+          console.log("Analytics consent granted.");
+          window.gtag('consent', 'update', {
+            ad_storage: 'granted',
+            analytics_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted'
+          });
+        } else {
+          console.log("Analytics consent denied.");
+          window.gtag('consent', 'update', {
+            ad_storage: 'denied',
+            analytics_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied'
+          });
+        }
       } else {
-        window.gtag('consent', 'update', {
-          ad_storage: 'denied',
-          analytics_storage: 'denied',
-          ad_user_data: 'denied',
-          ad_personalization: 'denied'
-        });
+        console.error("window.gtag is NOT available, retrying in 200ms");
       }
     }
+    updateConsent();
   };
 </script>
 <style>
