@@ -57,7 +57,23 @@ const { title, description = "Welcome to our static site" } = Astro.props;
         rel="stylesheet"
       />
     </noscript>
-    <!-- Google Analytics will be loaded after consent -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-11NLEWTL0B"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      // Consent Mode v2: default to denied
+      // @ts-ignore
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+      });
+      // @ts-ignore
+      gtag('js', new Date());
+      // @ts-ignore
+      gtag('config', 'G-11NLEWTL0B');
+    </script>
   </head>
   <body class="surface text-on-surface font-montserrat">
     <Nav />

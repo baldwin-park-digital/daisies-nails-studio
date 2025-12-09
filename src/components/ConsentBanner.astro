@@ -40,23 +40,22 @@
     }
     window.dispatchEvent(new Event("analyticsConsentChanged"));
 
-    // Inject Google Analytics only if consent is yes
-    if (answer === 'yes') {
-      if (!window.gtag) {
-        // Inject GA script
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-VYS6MHK4KC';
-        document.head.appendChild(script);
-        // Inject GA config
-        const inlineScript = document.createElement('script');
-        inlineScript.innerHTML = `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-11NLEWTL0B');
-        `;
-        document.head.appendChild(inlineScript);
+    // Consent Mode v2: update consent state
+    if (window.gtag) {
+      if (answer === 'yes') {
+        window.gtag('consent', 'update', {
+          ad_storage: 'granted',
+          analytics_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted'
+        });
+      } else {
+        window.gtag('consent', 'update', {
+          ad_storage: 'denied',
+          analytics_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied'
+        });
       }
     }
   };
