@@ -6,7 +6,8 @@ import ThemeToggle from "./ThemeToggle.astro";
 import Button from "./Button.astro";
 
 interface Props {
-  logo?: string;
+  logo?: { part1: string; part2: string };
+  logoSrc?: { src: string; width: number; height: number };
   logoHref?: string;
   navItems?: NavItem[];
   actionItems?: NavItem[];
@@ -14,6 +15,7 @@ interface Props {
 
 const {
   logo = siteConfig.logo,
+  logoSrc = siteConfig.logoSrc,
   logoHref = siteConfig.logoHref,
   navItems = siteConfig.navItems,
   actionItems = siteConfig.actionItems,
@@ -35,20 +37,32 @@ const getLinkClasses = (variant?: string) => {
     case "action":
       return "button-action";
     default:
-      return "font-medium transition-colors text-primary hover:text-primary-hover py-5";
+      return "font-medium transition-colors text-on-surface hover:text-primary-hover py-5";
   }
 };
-
-
 ---
 
 <nav
-  class="sticky top-0 z-100 bg-linear-to-r from-surface to-surface-dim shadow-md"
+  class="sticky top-0 z-100 bg-linear-to-r from-surface to-surface-dim"
 >
   <div
     class="max-w-6xl mx-auto px-6 md:px-2 md:py-0 py-3 flex justify-between items-center"
   >
-    <a href={logoHref} class="text-2xl font-bold">{logo}</a>
+    <a href={logoHref} class="flex flex-row items-center gap-x-2 md:py-2">
+      <img
+        src={logoSrc.src}
+        width={logoSrc.width}
+        height={logoSrc.height}
+        alt={`${logo.part1} ${logo.part2} logo`}
+        style="max-width:50px;max-height:50px;"
+      />
+      <div class="flex flex-col items-center justify-center leading-0">
+        <span class="font-medium font-great-vibes text-4xl">{logo.part1}</span>
+        <span class="-mt-2 text-xs uppercase font-montserrat">
+          {logo.part2}
+        </span>
+      </div>
+    </a>
     <div class="flex items-center gap-4 md:flex-row-reverse">
       <ThemeToggle />
       <button
@@ -80,120 +94,152 @@ const getLinkClasses = (variant?: string) => {
       </div>
       <ul
         id="mobileMenu"
-        class="hidden md:flex md:items-center fixed left-0 right-0 bottom-0 transition-opacity w-full bg-linear-to-r from-surface to-surface-dim opacity-0 flex-col z-[60] pointer-events-none md:static md:flex-row md:gap-6 lg:gap-8 md:p-0 md:w-auto md:h-auto md:translate-y-0 md:shrink md:grow-0 md:bg-transparent md:opacity-100 md:overflow-visible md:pointer-events-auto"
+        class="hidden md:flex md:items-center fixed left-0 right-0 bottom-0 transition-opacity w-full opacity-0 flex-col z-60 pointer-events-none md:static md:flex-row md:gap-4 lg:gap-8 md:p-0 md:w-auto md:h-auto md:translate-y-0 md:shrink md:grow-0 md:bg-transparent md:opacity-100 md:overflow-visible md:pointer-events-auto"
         style={`top: ${SITE_CONSTANTS.NAV_HEIGHT}px;`}
       >
         {/* Scrollable nav items */}
-        <div class="flex-1 overflow-y-auto flex flex-col items-center justify-start px-4 md:contents md:overflow-visible md:flex-none md:py-0" style={`padding-top: calc(25svh - ${SITE_CONSTANTS.NAV_HEIGHT}px);`}>
-          {navItems.map((item, index) => {
-            const hasSubmenu = item.submenu && item.submenu.length > 0;
-            const delayIndex = index;
+        <div
+          class="flex-1 overflow-y-auto flex flex-col items-center justify-start px-4 md:contents md:overflow-visible md:flex-none md:py-0"
+          style={`padding-top: calc(25svh - ${SITE_CONSTANTS.NAV_HEIGHT}px);`}
+        >
+          {
+            navItems.map((item, index) => {
+              const hasSubmenu = item.submenu && item.submenu.length > 0;
+              const delayIndex = index;
 
-            return (
-              <li
-                class="opacity-0 md:opacity-100 translate-y-4 md:translate-y-0 transition-all duration-500 md:shrink md:whitespace-nowrap text-xl md:text-base relative overflow-visible py-5 px-6 md:py-0 md:px-0"
-                style={`transition-delay: ${delays[delayIndex]}ms;`}
-                data-has-submenu={hasSubmenu}
-              >
-              {hasSubmenu ? (
-                <div class="group relative flex flex-col w-full md:w-auto">
-                  <button
-                    type="button"
-                    class={`${getLinkClasses(item.variant)} flex items-center justify-center gap-1 md:px-2`}
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    {item.label}
-                    <span class="text-sm md:hidden transition-transform translate-y-0.5" data-submenu-arrow>▼</span>
-                    <span class="hidden md:inline text-xs transition-transform group-hover:rotate-180 translate-y-0.5">▼</span>
-                  </button>
-
-                  {/* Invisible spacer to keep hover active while moving to submenu */}
-                  <div class="hidden md:block md:absolute md:left-0 md:right-0 md:top-full md:h-2 md:z-40 md:pointer-events-auto" />
-
-                  {/* Desktop Submenu Wrapper with padding for hover area */}
-                  <div class="hidden md:group-hover:block md:absolute md:left-0 md:right-0 md:top-full md:pt-2 md:z-50 md:opacity-100">
-                    {/* Inner submenu that aligns flush with nav bar */}
-                    <ul class="submenu md:bg-surface-dim md:rounded md:shadow-lg md:border md:border-primary/20 md:p-2 md:flex md:flex-wrap md:w-96 md:opacity-100 md:visible">
-                      {item.submenu!.map((subitem) => (
-                        <li class="px-4 py-2 md:py-2 hover:bg-surface-bright transition-colors md:w-1/2 md:opacity-100">
-                          <a
-                            href={subitem.href}
-                            class={getLinkClasses(subitem.variant)}
-                            target={subitem.external ? "_blank" : undefined}
-                            rel={subitem.external ? "noopener noreferrer" : undefined}
-                          >
-                            {subitem.label}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Mobile Submenu - Expandable */}
-                  <ul class="submenu-mobile md:hidden max-h-0 overflow-hidden rounded mt-2 md:mt-0 flex flex-wrap w-full md:static">
-                    {item.submenu!.map((subitem) => (
-                      <li class="px-4 py-3 w-1/2">
-                        <a
-                          href={subitem.href}
-                          class={`${getLinkClasses(subitem.variant)} text-lg block text-center`}
-                          target={subitem.external ? "_blank" : undefined}
-                          rel={subitem.external ? "noopener noreferrer" : undefined}
-                        >
-                          {subitem.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : (
-                <a
-                  href={item.href}
-                  class={getLinkClasses(item.variant)}
-                  target={item.external ? "_blank" : undefined}
-                  rel={item.external ? "noopener noreferrer" : undefined}
+              return (
+                <li
+                  class="opacity-0 md:opacity-100 translate-y-4 md:translate-y-0 transition-all duration-500 md:shrink md:whitespace-nowrap text-xl md:text-base relative overflow-visible py-5 px-6 md:py-0 md:px-0"
+                  style={`transition-delay: ${delays[delayIndex]}ms;`}
+                  data-has-submenu={hasSubmenu}
                 >
-                  {item.label}
-                </a>
-              )}
-            </li>
-          );
-        })}
+                  {hasSubmenu ? (
+                    <div class="group relative flex flex-col w-full md:w-auto">
+                      <button
+                        type="button"
+                        class={`${getLinkClasses(item.variant)} flex items-center justify-center gap-1 md:px-2`}
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        {item.label}
+                        <span
+                          class="text-sm md:hidden transition-transform translate-y-0.5"
+                          data-submenu-arrow
+                        >
+                          ▼
+                        </span>
+                        <span class="hidden md:inline text-xs transition-transform group-hover:rotate-180 translate-y-0.5">
+                          ▼
+                        </span>
+                      </button>
+
+                      {/* Invisible spacer to keep hover active while moving to submenu */}
+                      <div class="hidden md:block md:absolute md:left-0 md:right-0 md:top-full md:h-2 md:z-40 md:pointer-events-auto" />
+
+                      {/* Desktop Submenu Wrapper with padding for hover area */}
+                      <div class="hidden md:group-hover:block md:absolute md:left-0 md:right-0 md:top-full md:pt-2 md:z-50 md:opacity-100">
+                        {/* Inner submenu that aligns flush with nav bar */}
+                        <ul class="submenu md:bg-surface-dim md:rounded md:shadow-lg md:border md:border-primary/20 md:p-2 md:flex md:flex-wrap md:w-96 md:opacity-100 md:visible">
+                          {item.submenu!.map((subitem) => (
+                            <li class="px-4 py-2 md:py-2 hover:bg-surface-bright transition-colors md:w-1/2 md:opacity-100">
+                              <a
+                                href={subitem.href}
+                                class={getLinkClasses(subitem.variant)}
+                                target={subitem.external ? "_blank" : undefined}
+                                rel={
+                                  subitem.external
+                                    ? "noopener noreferrer"
+                                    : undefined
+                                }
+                              >
+                                {subitem.label}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Mobile Submenu - Expandable */}
+                      <ul class="submenu-mobile md:hidden max-h-0 overflow-hidden rounded mt-2 md:mt-0 flex flex-wrap w-full md:static">
+                        {item.submenu!.map((subitem) => (
+                          <li class="px-4 py-3 w-1/2">
+                            <a
+                              href={subitem.href}
+                              class={`${getLinkClasses(subitem.variant)} text-lg block text-center`}
+                              target={subitem.external ? "_blank" : undefined}
+                              rel={
+                                subitem.external
+                                  ? "noopener noreferrer"
+                                  : undefined
+                              }
+                            >
+                              {subitem.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <a
+                      href={item.href}
+                      class={getLinkClasses(item.variant)}
+                      target={item.external ? "_blank" : undefined}
+                      rel={item.external ? "noopener noreferrer" : undefined}
+                    >
+                      {item.label}
+                    </a>
+                  )}
+                </li>
+              );
+            })
+          }
         </div>
 
         {/* Fixed action items at bottom */}
-        {actionItems && actionItems.length > 0 && (
-          <>
-            <li
-              class="hidden md:hidden w-full max-w-xs border-t border-primary/20 my-4 md:hidden"
-              aria-hidden="true"
-            />
-            <div class="md:contents flex flex-col items-center justify-center gap-10 px-8 pb-24 md:gap-0 md:p-0 md:pb-0 border-t border-primary/20 md:border-t-0 pt-10 md:pt-0 w-full">
-              {actionItems && actionItems.map((item, index) => (
-                <li
-                  class="opacity-0 md:opacity-100 translate-y-4 md:translate-y-0 md:shrink-0 text-xl md:text-base w-full md:w-auto text-center md:text-left"
-                  style={`transition-delay: ${delays[navItems.length + index]}ms;`}
-                >
-                  <Button
-                    as="a"
-                    href={item.href}
-                    variant={item.variant as "primary" | "secondary" | "outline" | "action"}
-                    external={item.external}
-                    size="action"
-                  >
-                    {item.label}
-                  </Button>
-                </li>
-              ))}
-            </div>
-          </>
-        )}
+        {
+          actionItems && actionItems.length > 0 && (
+            <>
+              <li
+                class="hidden md:hidden w-full max-w-xs border-t border-primary/20 my-4"
+                aria-hidden="true"
+              />
+              <div class="md:contents flex flex-col items-center justify-center gap-10 px-8 pb-24 md:gap-0 md:p-0 md:pb-0 border-t border-primary/20 md:border-t-0 pt-10 md:pt-0 w-full">
+                {actionItems &&
+                  actionItems.map((item, index) => (
+                    <li
+                      class="opacity-0 md:opacity-100 translate-y-4 md:translate-y-0 md:shrink-0 text-xl md:text-base w-full md:w-auto text-center md:text-left"
+                      style={`transition-delay: ${delays[navItems.length + index]}ms;`}
+                    >
+                      <Button
+                        as="a"
+                        href={item.href}
+                        variant={
+                          item.variant as
+                            | "primary"
+                            | "secondary"
+                            | "outline"
+                            | "action"
+                        }
+                        external={item.external}
+                        size="action"
+                        external
+                      >
+                        {item.label}
+                      </Button>
+                    </li>
+                  ))}
+              </div>
+            </>
+          )
+        }
       </ul>
     </div>
   </div>
   <script>
     const hamburger = document.getElementById("hamburger") as HTMLButtonElement;
-    const mobileMenu = document.getElementById("mobileMenu") as HTMLUListElement;
+    const mobileMenu = document.getElementById(
+      "mobileMenu",
+    ) as HTMLUListElement;
     const backdrop = document.getElementById("backdrop") as HTMLDivElement;
     const line1 = document.getElementById("line1") as HTMLSpanElement;
     const line2 = document.getElementById("line2") as HTMLSpanElement;
@@ -204,27 +250,36 @@ const getLinkClasses = (variant?: string) => {
       if (!wrapper) return;
 
       // Get the mobile submenu
-      const submenu = wrapper.querySelector(".submenu-mobile") as HTMLElement | null;
+      const submenu = wrapper.querySelector(
+        ".submenu-mobile",
+      ) as HTMLElement | null;
       if (!submenu) return;
 
       // Only toggle on mobile
       if (window.innerWidth < 768) {
-        const isOpen = submenu.style.maxHeight && submenu.style.maxHeight !== "0px";
+        const isOpen =
+          submenu.style.maxHeight && submenu.style.maxHeight !== "0px";
         const newOpen = !isOpen;
 
         // Close all other submenus (accordion behavior)
         if (newOpen) {
-          mobileMenu.querySelectorAll(".submenu-mobile").forEach((otherSubmenu) => {
-            if (otherSubmenu !== submenu) {
-              (otherSubmenu as HTMLElement).style.maxHeight = "0px";
-              const otherButton = otherSubmenu.closest("div")?.querySelector("button[aria-haspopup]");
-              if (otherButton) {
-                otherButton.setAttribute("aria-expanded", "false");
-                const arrow = otherButton.querySelector("[data-submenu-arrow]");
-                if (arrow) arrow.classList.remove("rotate-180");
+          mobileMenu
+            .querySelectorAll(".submenu-mobile")
+            .forEach((otherSubmenu) => {
+              if (otherSubmenu !== submenu) {
+                (otherSubmenu as HTMLElement).style.maxHeight = "0px";
+                const otherButton = otherSubmenu
+                  .closest("div")
+                  ?.querySelector("button[aria-haspopup]");
+                if (otherButton) {
+                  otherButton.setAttribute("aria-expanded", "false");
+                  const arrow = otherButton.querySelector(
+                    "[data-submenu-arrow]",
+                  );
+                  if (arrow) arrow.classList.remove("rotate-180");
+                }
               }
-            }
-          });
+            });
         }
 
         // Set max-height to scrollHeight or 0
@@ -240,8 +295,15 @@ const getLinkClasses = (variant?: string) => {
           }
         }
 
-        (button as HTMLButtonElement).setAttribute("aria-expanded", String(newOpen));
-        console.log("Toggled submenu", { newOpen, scrollHeight: submenu.scrollHeight, maxHeight: submenu.style.maxHeight });
+        (button as HTMLButtonElement).setAttribute(
+          "aria-expanded",
+          String(newOpen),
+        );
+        console.log("Toggled submenu", {
+          newOpen,
+          scrollHeight: submenu.scrollHeight,
+          maxHeight: submenu.style.maxHeight,
+        });
       }
     }
 
@@ -338,7 +400,9 @@ const getLinkClasses = (variant?: string) => {
 
     const handleKeyboardInput = (e: Event) => {
       const keyEvent = e as KeyboardEvent;
-      const button = (keyEvent.target as HTMLElement).closest("button[aria-haspopup]");
+      const button = (keyEvent.target as HTMLElement).closest(
+        "button[aria-haspopup]",
+      );
       if (button) {
         if (keyEvent.key === "Enter" || keyEvent.key === " ") {
           keyEvent.preventDefault();
@@ -357,7 +421,7 @@ const getLinkClasses = (variant?: string) => {
           // Disable transitions temporarily for instant hide
           mobileMenu.style.transition = "none";
           backdrop.style.transition = "none";
-          
+
           const menuItems = mobileMenu.querySelectorAll("li");
           menuItems.forEach((item) => {
             (item as HTMLElement).style.transition = "none";
@@ -374,13 +438,13 @@ const getLinkClasses = (variant?: string) => {
             });
           });
         }
-        
+
         // Reset submenu inline styles on desktop (they're controlled by CSS hover)
         const submenus = mobileMenu.querySelectorAll(".submenu-mobile");
         submenus.forEach((submenu) => {
           (submenu as HTMLElement).style.maxHeight = "";
         });
-        
+
         // Reset aria-expanded and arrow rotation
         const buttons = mobileMenu.querySelectorAll("button[aria-haspopup]");
         buttons.forEach((button) => {
@@ -398,6 +462,14 @@ const getLinkClasses = (variant?: string) => {
     mobileMenu.addEventListener("keydown", handleKeyboardInput);
     window.addEventListener("resize", handleResize);
 
+    // Close menu after clicking a nav link (mobile only)
+    mobileMenu.addEventListener("click", function(e) {
+      const target = e.target as HTMLElement;
+      if (window.innerWidth < 768 && target.tagName === "A" && target.getAttribute("href")) {
+        closeMenu();
+      }
+    });
+
     // Cleanup function
     const cleanup = () => {
       hamburger.removeEventListener("click", handleHamburgerClick);
@@ -409,4 +481,5 @@ const getLinkClasses = (variant?: string) => {
 
     // Cleanup when user leaves page (closes tab, goes to different site)
     window.addEventListener("beforeunload", cleanup);
-
+  </script>
+</nav>

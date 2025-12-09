@@ -1,4 +1,5 @@
 import { siteConfig as globalSiteConfig } from "./site";
+import { siteConfig } from "./navigation";
 
 export interface FooterLink {
   label: string;
@@ -23,37 +24,18 @@ export interface FooterConfig {
 export const footerConfig: FooterConfig = {
   sections: [
     {
-      title: "Product",
+      title: "We're Hiring!",
       links: [
-        { label: "Features", href: "#features" },
-        { label: "Pricing", href: "#pricing" },
-        { label: "Documentation", href: "/docs" },
-        { label: "Changelog", href: "/changelog" },
+        { label: "Nail Technicians, DM your portfolio to us on Instagram.", href: "https://www.instagram.com/daisiesnailsstudio" },
       ],
     },
     {
-      title: "Company",
-      links: [
-        { label: "About", href: "/about" },
-        { label: "Blog", href: "/blog" },
-        { label: "Careers", href: "/careers" },
-        { label: "Contact", href: "/contact" },
-      ],
-    },
-    {
-      title: "Resources",
-      links: [
-        { label: "Help Center", href: "#help", external: true },
-        { label: "Community", href: "#community", external: true },
-        { label: "API Docs", href: "/api" },
-        { label: "Status", href: "#status", external: true },
-      ],
+      title: "Site",
+      links: siteConfig.navItems.map(({ label, href, external }) => ({ label, href, external })),
     },
   ],
   legal: [
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Service", href: "/terms" },
-    { label: "Cookie Policy", href: "/cookies" },
+
   ],
   copyright: `© ${new Date().getFullYear()} ${globalSiteConfig.company.name}. All rights reserved.`,
 };

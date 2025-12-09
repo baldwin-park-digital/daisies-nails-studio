@@ -1,5 +1,6 @@
 ---
 import { contactInfo, fullContactData } from "../data/contact";
+import SvgIcon from "./SvgIcon.astro";
 
 interface Props {
   title?: string;
@@ -25,7 +26,7 @@ const variantClasses = {
 };
 ---
 
-<section class={`py-16 md:py-12 ${variantClasses[variant]}`} id="contact">
+<section class={`pt-20 pb-16 ${variantClasses[variant]}`} id="contact">
   <div class="max-w-7xl mx-auto px-6 md:px-2">
     <!-- Header -->
     <div class="mb-12 text-center">
@@ -39,7 +40,7 @@ const variantClasses = {
       )}
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
       <!-- Map -->
       {showMap && config.mapEmbedUrl && (
         <div class="rounded-lg overflow-hidden">
@@ -56,8 +57,8 @@ const variantClasses = {
       )}
 
       <!-- Contact Info -->
-      <div class={config.mapEmbedUrl ? "" : "lg:col-span-2"}>
-        <div class={config.mapEmbedUrl ? "space-y-8" : "lg:grid lg:grid-cols-2 lg:gap-12 space-y-8 lg:space-y-0"}>
+      <div class={config.mapEmbedUrl ? "" : "md:col-span-2"}>
+        <div class={config.mapEmbedUrl ? "space-y-8" : "md:grid md:grid-cols-2 md:gap-12 space-y-8 md:space-y-0"}>
           <!-- Address -->
           <div>
             <h3 class="text-sm font-semibold text-primary uppercase tracking-wide mb-2">
@@ -131,7 +132,7 @@ const variantClasses = {
                     class="w-10 h-10 flex items-center justify-center bg-primary/10 text-primary rounded-lg hover:bg-primary hover:text-on-primary transition-colors"
                     aria-label={social.label}
                   >
-                    <span class="text-lg">{social.icon}</span>
+                    <SvgIcon icon={social.label} size={24} />
                   </a>
                 ))}
               </div>

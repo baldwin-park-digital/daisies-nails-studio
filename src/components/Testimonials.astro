@@ -74,9 +74,12 @@ const renderStars = (rating: number) => {
           <div class="flex items-center gap-4">
             {testimonial.image && (
               <img
-                src={testimonial.image}
+                src={testimonial.image.src}
+                width={testimonial.image.width}
+                height={testimonial.image.height}
                 alt={testimonial.name}
                 class="w-12 h-12 rounded-full object-cover"
+                loading="lazy"
               />
             )}
             <div class="flex-1">

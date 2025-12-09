@@ -15,26 +15,19 @@ export interface NavigationConfig {
 
 export const navigationConfig: NavigationConfig = {
   navItems: [
-    { label: "Home", href: "/" },
-    {
-      label: "Docs",
-      href: "/docs",
-      submenu: [
-        { label: "Getting Started", href: "/docs" },
-        { label: "API Reference", href: "/docs/api" },        { label: "API Reference", href: "/docs/api" },
-      ]
-    },
-    { label: "Theme", href: "/theme" },
-    { label: "Contact", href: "#contact" }
+    { label: "Menu", href: "/menu" },
+    { label: "About", href: "./#about" },
+    { label: "Contact", href: "./#contact" }
   ],
   actionItems: [
     { label: globalSiteConfig.contact.phone || "", href: `tel:${globalSiteConfig.contact.phone}`, variant: "default" },
-    { label: "Get Started", href: "/signup", variant: "outline" },
+    { label: "BOOK NOW", href: "https://daisiesnailsstudio.getrichbooking.com/", variant: "outline" },
   ]
 };
 
 export const siteConfig = {
   logo: globalSiteConfig.company.logo,
+  logoSrc: globalSiteConfig.company.logoSrc,
   logoHref: globalSiteConfig.company.logoHref,
   ...navigationConfig,
 };

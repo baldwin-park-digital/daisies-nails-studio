@@ -85,7 +85,9 @@ const categories = showCategories
             aria-label={`View ${image.title || image.alt}`}
           >
             <img
-              src={image.src}
+              src={image.src.src}
+              width={image.src.width}
+              height={image.src.height}
               alt={image.alt}
               class="w-full h-full object-cover"
               style="transition: transform 300ms ease-out;"
@@ -143,7 +145,9 @@ const categories = showCategories
               aria-label={`View ${image.title || image.alt}`}
             >
               <img
-                src={image.src}
+                src={image.src.src}
+                width={image.src.width}
+                height={image.src.height}
                 alt={image.alt}
                 class="w-full h-full object-cover"
                 style="transition: transform 300ms ease-out;"

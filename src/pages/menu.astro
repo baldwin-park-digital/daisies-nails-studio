@@ -1,0 +1,487 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CTA from "../components/CTA.astro";
+import SquareSVG from "../assets/nails/Square.svg";
+import SquovalSVG from "../assets/nails/Squoval.svg";
+import RoundSVG from "../assets/nails/Round.svg";
+import OvalSVG from "../assets/nails/Oval.svg";
+import AlmondSVG from "../assets/nails/Almond.svg";
+import BallerinaSVG from "../assets/nails/BallerinaCoffin.svg";
+import StilettoSVG from "../assets/nails/Stilletto.svg";
+
+const seoTitle =
+  "Services & Pricing - Daisies Nails Studio | Manicures, Pedicures & Nail Art";
+const seoDescription =
+  "Explore our full range of nail services: manicures, pedicures, gel nails, acrylics, and custom nail art. Professional treatments with transparent pricing in Los Angeles.";
+
+const services = {
+  manicure: [
+    {
+      name: "Basic",
+      duration: "30 minutes",
+      price: "$25",
+      features: [
+        "Nail trim, file & polish",
+        "Cuticle treatment",
+        "Hand soak & massage",
+        "Warm towel",
+      ],
+    },
+    {
+      name: "Signature",
+      duration: "45 minutes",
+      price: "$35",
+      features: [
+        "Basic Manicure",
+        "Milk & Honey sea salt",
+        "Milk & Honey face mask",
+        "5-min massage",
+        "Callus removal",
+      ],
+    },
+    {
+      name: "Luxury",
+      duration: "60 minutes",
+      price: "$50",
+      features: [
+        "Basic Manicure",
+        "Milk & Honey sea salt",
+        "Aloe Green Tea Mask",
+        "Parrafin wax",
+        "Aloe Green Tea Sea Salt Soak",
+        "10-min massage",
+        "Callus removal",
+      ],
+    },
+    {
+      name: "Classic Gel",
+      duration: "40 minutes",
+      price: "$45",
+      features: [
+        "Nail trim, file & polish",
+        "Cuticle treatment",
+        "Hand massage",
+        "Warm towel",
+        "Gel polish",
+      ],
+    },
+    {
+      name: "Vegan Basic",
+      duration: "30 minutes",
+      price: "$35",
+      features: ["Basic Manicure", "Dazzle dry polish"],
+    },
+    {
+      name: "Vegan Luxury",
+      duration: "60 minutes",
+      price: "$60",
+      features: [
+        "Basic Manicure",
+        "Aloe Green Tea Mask",
+        "Aloe Green Tea Sea Salt Soak",
+        "10-min massage",
+        "Parrafin wax",
+      ],
+    },
+  ],
+  pedicure: [
+    {
+      name: "Basic",
+      duration: "30 minutes",
+      price: "$30",
+      features: [
+        "Nail trim, file & polish",
+        "Cuticle treatment",
+        "Sugar scrub",
+        "Foot massage",
+        "Warm towel",
+      ],
+    },
+    {
+      name: "Signature",
+      duration: "45 minutes",
+      price: "$50",
+      features: [
+        "Basic Pedicure",
+        "Milk & Honey sea salt",
+        "Milk & Honey face mask",
+        "Callus removal",
+        "5-min foot massage",
+        "Warm towel",
+      ],
+    },
+    {
+      name: "Luxury",
+      duration: "60 minutes",
+      price: "$70",
+      features: [
+        "Basic Pedicure",
+        "Collagen mask",
+        "Aloe Green Tea soak with essential oils",
+        "Aloe Green Tea scrub",
+        "Callus removal",
+        "10-min CBD-infused foot massage",
+        "Parrafin wax",
+        "Warm towel",
+      ],
+    },
+    {
+      name: "Classic Gel",
+      duration: "45 minutes",
+      price: "$50",
+      features: [
+        "Nail trim, file & polish",
+        "Cuticle treatment",
+        "Foot massage",
+        "Sugar scrub",
+        "Warm towel",
+        "Gel polish",
+      ],
+    },
+    {
+      name: "Vegan Basic",
+      duration: "30 minutes",
+      price: "$40",
+      features: ["Basic Pedicure", "Dazzle dry polish"],
+    },
+    {
+      name: "Vegan Luxury",
+      duration: "60 minutes",
+      price: "$80",
+      features: [
+        "Basic Pedicure",
+        "Collagen mask",
+        "Aloe Green Tea Soak with essential oils",
+        "Aloe Green Tea Sea Scrub",
+        "Parrafin wax",
+        "10-min CBD-infused foot massage",
+        "Warm towel",
+        "Dazzle dry polish",
+      ],
+    },
+  ],
+  enhancements: [
+    { name: "Acrylic Full Set w/Gel", price: "$70+" },
+    { name: "Gel Extension", price: "$70+" },
+    { name: "Hard Gel", price: "$80+" },
+    { name: "Acrylic Refill", price: "$60+" },
+    { name: "Hard Gel Fill", price: "$65+" },
+    { name: "Dipping Powder", price: "$70+" },
+  ],
+  addOns: [
+    { name: "Gel Color", price: "$25" },
+    { name: "Callus Removal", price: "$10" },
+    { name: "Gel Change", price: "$35+" },
+    { name: "Parrafin Wax", price: "$15" },
+    { name: "Buffing Shine", price: "$10" },
+    { name: "Acrylic/GelX/Gel Builder Removal", price: "$20+" },
+    { name: "Massage", price: "$1 per minute" },
+  ],
+  waxing: [
+    { name: "Eyebrow Wax", price: "$15" },
+    { name: "Half Leg", price: "$40" },
+    { name: "Lip", price: "$12" },
+    { name: "Full Leg", price: "$65" },
+    { name: "Chin", price: "$12" },
+    { name: "Half Arm", price: "$30" },
+    { name: "Full Face", price: "$45" },
+    { name: "Full Arm", price: "$40" },
+    { name: "Eyebrow Tinting", price: "$25" },
+    { name: "Bikini Line", price: "$30" },
+    { name: "Eyelash Tinting", price: "$35" },
+    { name: "Brazilian", price: "$50" },
+    { name: "Eyebrow Lamination", price: "$85" },
+  ],
+  lashes: [
+    { name: "Classic Fullset", price: "$120" },
+    { name: "Volume Fullset", price: "$150" },
+    { name: "Classic Fill", price: "$60+" },
+    { name: "Volume Fill", price: "$80" },
+    { name: "Design Fullset", price: "$170" },
+  ],
+};
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+  <section class="py-12 px-[5%]">
+    <div class="max-w-6xl mx-auto text-center space-y-3">
+      <p class="text-sm tracking-[0.18em] uppercase text-on-surface">Menu</p>
+      <h1 class="text-4xl md:text-5xl font-bold text-primary">Our Services</h1>
+      <p class="text-lg text-on-surface max-w-2xl mx-auto">
+        From classic care to indulgent luxury — your perfect treatment awaits.
+      </p>
+    </div>
+  </section>
+  <div class="bg-surface min-h-screen px-4 sm:px-6 lg:px-[5%] py-8 sm:py-12">
+    <div
+      class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start"
+    >
+      <!-- LEFT COLUMN: Services Menu -->
+      <div>
+        <!-- Manicures -->
+        <div class="mb-8 lg:mb-10">
+          <h2
+            class="text-3xl sm:text-4xl lg:text-5xl font-bold text-on-surface mb-4 lg:mb-6"
+          >
+            Manicure
+          </h2>
+          {
+            services.manicure.map((service) => (
+              <div class="mb-4 lg:mb-5">
+                <div class="flex items-baseline gap-2 mb-1 flex-wrap">
+                  <span class="text-lg sm:text-xl lg:text-2xl font-bold text-on-surface">
+                    {service.name}
+                  </span>
+                  <span class="text-sm sm:text-base text-on-surface font-light">
+                    · {service.duration}
+                  </span>
+                </div>
+                <div class="text-lg sm:text-xl lg:text-2xl font-bold text-on-surface">
+                  {service.price}
+                </div>
+                <div class="text-sm sm:text-base text-on-surface/75 leading-relaxed mt-1">
+                  {service.features.join(" • ")}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <!-- Pedicures -->
+        <div class="mb-8 lg:mb-10">
+          <h2
+            class="text-3xl sm:text-4xl lg:text-5xl font-bold text-on-surface mb-4 lg:mb-6"
+          >
+            Pedicure
+          </h2>
+          {
+            services.pedicure.map((service) => (
+              <div class="mb-4 lg:mb-5">
+                <div class="flex items-baseline gap-2 mb-1 flex-wrap">
+                  <span class="text-lg sm:text-xl lg:text-2xl font-bold text-on-surface">
+                    {service.name}
+                  </span>
+                  <span class="text-sm sm:text-base text-on-surface/60">
+                    · {service.duration}
+                  </span>
+                </div>
+                <div class="text-lg sm:text-xl lg:text-2xl font-bold text-on-surface">
+                  {service.price}
+                </div>
+                <div class="text-sm sm:text-base text-on-surface/75 leading-relaxed mt-1">
+                  {service.features.join(" • ")}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <!-- Vegan Note -->
+        <div
+          class="p-3 sm:p-4 rounded text-xs sm:text-sm text-on-surface/80 mt-6 lg:mt-8"
+        >
+          <strong class="text-on-surface">🌿 Vegan</strong> - Made without animal-derived
+          ingredients. Cruelty-free and eco-conscious.
+        </div>
+      </div>
+      <!-- RIGHT COLUMN: Nail Shapes & Services -->
+      <div class="lg:sticky lg:top-8">
+        <!-- Nail Shapes -->
+        <div
+          class="bg-[#FDFBF7] p-4 sm:p-6 lg:p-8 rounded border border-[#1a1a1a] mb-6 lg:mb-8"
+        >
+          <div
+            class="text-xs sm:text-sm font-bold uppercase text-center mb-4 lg:mb-6 tracking-wide text-[#1a1a1a]"
+          >
+            Nail Shapes
+          </div>
+          <div
+            class="grid grid-cols-4 lg:grid-cols-7 gap-2 sm:gap-3 lg:gap-4 text-center"
+          >
+            <div class="flex flex-col items-center gap-1 lg:gap-2">
+              <div
+                class="h-12 sm:h-14 lg:h-16 flex items-center justify-center"
+              >
+                <img
+                  src={SquareSVG.src}
+                  alt="Square nail shape illustration"
+                  class="h-12 sm:h-14 lg:h-16 w-auto"
+                />
+              </div>
+              <div class="text-xs font-medium text-[#1a1a1a]">Square</div>
+            </div>
+            <div class="flex flex-col items-center gap-1 lg:gap-2">
+              <div
+                class="h-12 sm:h-14 lg:h-16 flex items-center justify-center"
+              >
+                <img
+                  src={SquovalSVG.src}
+                  alt="Squoval nail shape illustration"
+                  class="h-12 sm:h-14 lg:h-16 w-auto"
+                />
+              </div>
+              <div class="text-xs font-medium text-[#1a1a1a]">Squoval</div>
+            </div>
+            <div class="flex flex-col items-center gap-1 lg:gap-2">
+              <div
+                class="h-12 sm:h-14 lg:h-16 flex items-center justify-center"
+              >
+                <img
+                  src={RoundSVG.src}
+                  alt="Round nail shape illustration"
+                  class="h-12 sm:h-14 lg:h-16 w-auto"
+                />
+              </div>
+              <div class="text-xs font-medium text-[#1a1a1a]">Round</div>
+            </div>
+            <div class="flex flex-col items-center gap-1 lg:gap-2">
+              <div
+                class="h-12 sm:h-14 lg:h-16 flex items-center justify-center"
+              >
+                <img
+                  src={OvalSVG.src}
+                  alt="Oval nail shape illustration"
+                  class="h-12 sm:h-14 lg:h-16 w-auto"
+                />
+              </div>
+              <div class="text-xs font-medium text-[#1a1a1a]">Oval</div>
+            </div>
+            <div class="flex flex-col items-center gap-1 lg:gap-2">
+              <div
+                class="h-12 sm:h-14 lg:h-16 flex items-center justify-center"
+              >
+                <img
+                  src={AlmondSVG.src}
+                  alt="Almond nail shape illustration"
+                  class="h-12 sm:h-14 lg:h-16 w-auto"
+                />
+              </div>
+              <div class="text-xs font-medium text-[#1a1a1a]">Almond</div>
+            </div>
+            <div class="flex flex-col items-center gap-1 lg:gap-2">
+              <div
+                class="h-12 sm:h-14 lg:h-16 flex items-center justify-center"
+              >
+                <img
+                  src={BallerinaSVG.src}
+                  alt="Ballerina coffin nail shape illustration"
+                  class="h-12 sm:h-14 lg:h-16 w-auto"
+                />
+              </div>
+              <div class="flex flex-col text-[10px] font-medium text-[#1a1a1a]">
+                <div>Ballerina/</div>
+                <div>Coffin</div>
+              </div>
+            </div>
+            <div class="flex flex-col items-center gap-1 lg:gap-2">
+              <div
+                class="h-12 sm:h-14 lg:h-16 flex items-center justify-center"
+              >
+                <img
+                  src={StilettoSVG.src}
+                  alt="Stiletto nail shape illustration"
+                  class="h-12 sm:h-14 lg:h-16 w-auto"
+                />
+              </div>
+              <div class="text-xs font-medium text-[#1a1a1a]">Stiletto</div>
+            </div>
+          </div>
+        </div>
+        <!-- Enhancements -->
+        <div
+          class="bg-surface p-4 sm:p-6 lg:p-8 rounded border border-on-surface mb-6 lg:mb-8"
+        >
+          <div
+            class="text-lg sm:text-xl lg:text-2xl font-bold text-on-surface mb-3 lg:mb-4"
+          >
+            Enhancements
+          </div>
+          <div class="grid grid-cols-2 gap-3 lg:gap-4">
+            {
+              services.enhancements.map((service) => (
+                <div class="text-sm sm:text-base lg:text-lg">
+                  <div class="font-semibold text-on-surface">
+                    {service.name}
+                  </div>
+                  <div class="text-sm lg:text-base text-on-surface/70">
+                    {service.price}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <!-- Add-Ons -->
+        <div
+          class="bg-surface p-4 sm:p-6 lg:p-8 rounded border border-on-surface mb-6 lg:mb-8"
+        >
+          <div
+            class="text-lg sm:text-xl lg:text-2xl font-bold text-on-surface mb-3 lg:mb-4"
+          >
+            Add-Ons
+          </div>
+          <div class="grid grid-cols-2 gap-2 lg:gap-3">
+            {
+              services.addOns.map((service) => (
+                <div class="text-sm sm:text-base flex justify-between">
+                  <span class="font-medium text-on-surface">
+                    {service.name}
+                  </span>
+                  <span class="text-on-surface/70">{service.price}</span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <!-- Waxing & Tinting -->
+        <div
+          class="bg-surface p-4 sm:p-6 lg:p-8 rounded border border-on-surface mb-6 lg:mb-8"
+        >
+          <div
+            class="text-lg sm:text-xl lg:text-2xl font-bold text-on-surface mb-3 lg:mb-4"
+          >
+            Waxing & Tinting
+          </div>
+          <div class="grid grid-cols-2 gap-2 lg:gap-3">
+            {
+              services.waxing.map((service) => (
+                <div class="text-sm sm:text-base flex justify-between">
+                  <span class="font-medium text-on-surface">
+                    {service.name}
+                  </span>
+                  <span class="text-on-surface/70">{service.price}</span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <!-- Eyelash Extensions -->
+        <div
+          class="bg-surface p-4 sm:p-6 lg:p-8 rounded border border-on-surface mb-6 lg:mb-8"
+        >
+          <div
+            class="text-lg sm:text-xl lg:text-2xl font-bold text-on-surface mb-3 lg:mb-4"
+          >
+            Eyelash Extensions
+          </div>
+          <div class="grid grid-cols-2 gap-2 lg:gap-3">
+            {
+              services.lashes.map((service) => (
+                <div class="text-sm sm:text-base flex justify-between">
+                  <span class="font-medium text-on-surface">
+                    {service.name}
+                  </span>
+                  <span class="text-on-surface/70">{service.price}</span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    <CTA
+      title="Love What You See?"
+      description="Your perfect nails are just one click away."
+      primaryCta={{ label: "Get My Appointment", href: "https://daisiesnailsstudio.getrichbooking.com/", external: true }}
+      variant="gradient"
+    />
+  </div>
+</Layout>

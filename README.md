@@ -1,3 +1,34 @@
+## Image Optimization Setup
+
+This project can use Astro's official image optimization integration for automatic resizing, format conversion, and lazy loading.
+
+### 1. Install the integration
+```sh
+npm install @astrojs/image
+```
+
+### 2. Add to `astro.config.mjs`
+```js
+import { astroImage } from '@astrojs/image';
+export default defineConfig({
+  integrations: [astroImage()],
+});
+```
+
+### 3. Usage in components/pages
+```astro
+---
+import { Image } from '@astrojs/image/components';
+---
+<Image src="/src/assets/your-image.jpg" width={400} height={300} alt="Description" />
+```
+
+### 4. Best Practices
+- Use modern formats (WebP, AVIF)
+- Compress images before upload
+- Use `loading="lazy"` for below-the-fold images
+- Always set `width` and `height` attributes
+- Use responsive images with `srcset` and `sizes` if needed
 # Service Business Website Template
 
 A professional, ready-to-customize website template for service-based businesses like salons, spas, studios, bakeries, and cafes. Built with **Astro** and **Tailwind CSS** for fast, modern websites.

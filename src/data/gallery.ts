@@ -1,73 +1,83 @@
 export interface GalleryImage {
   id: string;
-  src: string;
+  src: { src: string; width: number; height: number };
   alt: string;
   title?: string;
   category?: string;
 }
 
+import goldAccentedNails from '../assets/nail-gallery/gold-accented-nails.jpg';
+import blackNails from '../assets/nail-gallery/black-nails.jpg';
+import patternedNails from '../assets/nail-gallery/patterned-nails.jpg';
+import greenGoldNails from '../assets/nail-gallery/green-gold-nails.jpg';
+import pinkFlowerNails from '../assets/nail-gallery/pink-flower-nails.jpg';
+import silverNails from '../assets/nail-gallery/silver-nails.jpg';
+import redStilettoNails from '../assets/nail-gallery/red-stiletto-nails.jpg';
+import redCoffinNails from '../assets/nail-gallery/red-coffin-nails.jpg';
+import pinkNails from '../assets/nail-gallery/pink-nails.jpg';
+
 export const galleryImages: GalleryImage[] = [
   {
     id: "1",
-    src: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
-    alt: "Modern interior design",
-    title: "Modern Living Space",
-    category: "Interior",
+    src: goldAccentedNails,
+    alt: "Gold accented nails with art",
+    title: "Gold Accented Nails",
+    category: "Gold, Art",
   },
   {
     id: "2",
-    src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
-    alt: "Contemporary home exterior",
-    title: "Contemporary Architecture",
-    category: "Exterior",
+    src: blackNails,
+    alt: "Black nails",
+    title: "Classic Black Nails",
+    category: "Black, Classic",
   },
   {
     id: "3",
-    src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
-    alt: "Minimalist kitchen",
-    title: "Minimalist Kitchen",
-    category: "Interior",
+    src: patternedNails,
+    alt: "Nails with abstract pattern",
+    title: "Patterned Nails",
+    category: "Pattern, Art",
   },
   {
     id: "4",
-    src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
-    alt: "Bedroom design",
-    title: "Serene Bedroom",
-    category: "Interior",
+    src: greenGoldNails,
+    alt: "Green and gold nails",
+    title: "Green & Gold Nails",
+    category: "Green, Gold",
   },
   {
     id: "5",
-    src: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&h=600&fit=crop",
-    alt: "Office space",
-    title: "Creative Office",
-    category: "Commercial",
+    src: pinkFlowerNails,
+    alt: "Pink nails with floral art",
+    title: "Pink Floral Nails",
+    category: "Pink, Floral",
   },
   {
     id: "6",
-    src: "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800&h=600&fit=crop",
-    alt: "Outdoor patio",
-    title: "Outdoor Living",
-    category: "Exterior",
+    src: silverNails,
+    alt: "Silver chrome nails",
+    title: "Silver Chrome Nails",
+    category: "Silver, Chrome",
   },
   {
     id: "7",
-    src: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&h=600&fit=crop",
-    alt: "Bathroom design",
-    title: "Spa Bathroom",
-    category: "Interior",
+    src: redStilettoNails,
+    alt: "Red nails",
+    title: "Red Nails",
+    category: "Red, Classic",
   },
   {
     id: "8",
-    src: "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&h=600&fit=crop",
-    alt: "Dining room",
-    title: "Elegant Dining",
-    category: "Interior",
+    src: redCoffinNails,
+    alt: "Red nails",
+    title: "Red Nails",
+    category: "Red, Classic",
   },
   {
     id: "9",
-    src: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800&h=600&fit=crop",
-    alt: "Storefront design",
-    title: "Modern Storefront",
-    category: "Commercial",
+    src: pinkNails,
+    alt: "Pink nails",
+    title: "Pink Nails",
+    category: "Pink, Classic",
   },
 ];

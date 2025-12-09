@@ -25,8 +25,14 @@ const { title, description = "Welcome to our static site" } = Astro.props;
       const theme = localStorage.getItem("theme") || "dark";
       document.documentElement.setAttribute("data-theme", theme);
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="surface text-on-surface">
+  <body class="surface text-on-surface font-montserrat">
     <Nav />
     <main class="max-w-6xl mx-auto px-6 md:px-2 py-8">
       <slot />

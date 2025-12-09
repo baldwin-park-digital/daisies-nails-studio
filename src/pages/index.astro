@@ -1,57 +1,95 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
-import CardGrid from "../components/CardGrid.astro";
+import heroNailsImg from "../assets/hero_nails.jpg";
+import Card from "../components/Card.astro";
 import CTA from "../components/CTA.astro";
 import Testimonials from "../components/Testimonials.astro";
 import FAQ from "../components/FAQ.astro";
 import Gallery from "../components/Gallery.astro";
 import About from "../components/About.astro";
-import Menu from "../components/Menu.astro";
 import Contact from "../components/Contact.astro";
-import { featuresCardGrid, cardVariantsGrid } from "../data/cardGrid";
 ---
 
 <Layout title="Welcome" description="Astro starter template for static sites">
   <Hero
-    title="Welcome to Your Static Site"
-    description="Built with Astro & Tailwind CSS for blazing fast performance"
-    primaryCta={{ label: "Get Started", href: "#about" }}
-    secondaryCta={{ label: "Learn More", href: "#services" }}
+    title="Treat Yourself to Perfect Nails"
+    description="From classic manicures to dazzling designs, your nails will shine."
+    primaryCta={{ label: "BOOK MY APPOINTMENT", href: "https://daisiesnailsstudio.getrichbooking.com/", external: true }}
+    image={heroNailsImg}
+    imageAlt="red painted nails background"
     fullViewport
   />
 
-  <section id="services" class="py-16 md:py-12">
-    <CardGrid config={cardVariantsGrid} />
+  <section id="services" class="py-16 md:py-24 surface">
+    <div class="max-w-6xl mx-auto px-6 md:px-2">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
+          Our Services
+        </h2>
+        <p class="text-lg text-on-surface-dim">
+          Experience luxury nail care and beauty services
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <Card
+          title="Manicures"
+          description="Professional nail care, shaping, and polish application for beautiful hands."
+        />
+
+        <Card
+          title="Pedicures"
+          description="Relaxing foot treatments with exfoliation, massage, and perfect polish."
+        />
+
+        <Card
+          title="Waxing & Tinting"
+          description="Smooth, flawless skin with expert waxing and brow tinting services."
+        />
+
+        <Card
+          title="Eyelash Extensions"
+          description="Enhance your natural beauty with luxurious, long-lasting lash extensions."
+        />
+      </div>
+      <div class="flex justify-center mt-10">
+        <a
+          href="/menu"
+          class="button-primary px-8 py-4 text-lg font-bold rounded shadow-lg hover:scale-105 transition-transform"
+        >
+          View Full Menu & Pricing
+        </a>
+      </div>
+    </div>
   </section>
 
   <About />
 
-  <Menu
-    title="Featured Items"
-    description="A taste of what we offer"
-    isPreview
-    previewLimit={6}
-    previewCta={{ label: "View Full Menu", href: "/menu" }}
-  />
-
   <Gallery
     title="Our Work"
-    description="Explore our portfolio of beautiful projects"
-    showCategories
+    description="Explore our portfolio of beautiful projects. See more on our Instagram!"
   />
-
+  <div class="flex justify-center mb-5">
+    <a
+      href="https://daisiesnailsstudio.getrichbooking.com/"
+      class="button-primary px-8 py-4 text-lg font-bold rounded shadow-lg hover:scale-105 transition-transform"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Get My Nails Done
+    </a>
+  </div>
   <Testimonials />
 
   <FAQ />
-
-  <Contact showMap={true}/>
+  
+  <Contact showMap={true} />
 
   <CTA
-    title="Ready to Build?"
-    description="Customize this template to create your perfect static site"
-    primaryCta={{ label: "Get Started", href: "#about" }}
-    secondaryCta={{ label: "View Docs", href: "/docs" }}
+    title="Don't Miss Out!"
+    description="Bookings fill up fast. Treat yourself to the ultimate care experience."
+    primaryCta={{ label: "Plan My Appointment", href: "https://daisiesnailsstudio.getrichbooking.com/", external: true }}
     variant="gradient"
   />
 </Layout>
