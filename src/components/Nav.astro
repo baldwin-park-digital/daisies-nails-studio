@@ -148,6 +148,7 @@ const getLinkClasses = (variant?: string) => {
                                     ? "noopener noreferrer"
                                     : undefined
                                 }
+                                data-element={`nav-submenu-${subitem.label?.toLowerCase().replace(/\s+/g, '-')}`}
                               >
                                 {subitem.label}
                               </a>
@@ -169,6 +170,7 @@ const getLinkClasses = (variant?: string) => {
                                   ? "noopener noreferrer"
                                   : undefined
                               }
+                              data-element={`nav-submenu-${subitem.label?.toLowerCase().replace(/\s+/g, '-')}`}
                             >
                               {subitem.label}
                             </a>
@@ -182,6 +184,7 @@ const getLinkClasses = (variant?: string) => {
                       class={getLinkClasses(item.variant)}
                       target={item.external ? "_blank" : undefined}
                       rel={item.external ? "noopener noreferrer" : undefined}
+                      data-element={`nav-item-${item.label?.toLowerCase().replace(/\s+/g, '-')}`}
                     >
                       {item.label}
                     </a>

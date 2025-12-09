@@ -1,4 +1,11 @@
 <script>
+  // TypeScript declaration for window.gtag
+  declare global {
+    interface Window {
+      gtag?: (...args: any[]) => void;
+    }
+  }
+
   function getCookie(name: string) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -32,6 +39,26 @@
       banner.style.display = "none";
     }
     window.dispatchEvent(new Event("analyticsConsentChanged"));
+
+    // Inject Google Analytics only if consent is yes
+    if (answer === 'yes') {
+      if (!window.gtag) {
+        // Inject GA script
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-VYS6MHK4KC';
+        document.head.appendChild(script);
+        // Inject GA config
+        const inlineScript = document.createElement('script');
+        inlineScript.innerHTML = `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-VYS6MHK4KC');
+        `;
+        document.head.appendChild(inlineScript);
+      }
+    }
   };
 </script>
 <style>

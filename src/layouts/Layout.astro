@@ -57,22 +57,7 @@ const { title, description = "Welcome to our static site" } = Astro.props;
         rel="stylesheet"
       />
     </noscript>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VYS6MHK4KC"
-    ></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VYS6MHK4KC"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        //@ts-ignore
-        dataLayer.push(arguments);
-      }
-      //@ts-ignore
-      gtag("js", new Date());
-      //@ts-ignore
-      gtag("config", "G-VYS6MHK4KC");
-    </script>
+    <!-- Google Analytics will be loaded after consent -->
   </head>
   <body class="surface text-on-surface font-montserrat">
     <Nav />

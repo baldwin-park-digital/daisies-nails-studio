@@ -41,7 +41,10 @@
     if (!hasAnalyticsConsent()) return;
     const eventData = {
       event: 'page_view',
-      page: getPageName(),
+      event_category: 'impression',
+      event_label: getPageName(),
+      page_location: window.location.href,
+      page_path: getPageName(),
       timestamp: Date.now(),
     };
     window.dataLayer = window.dataLayer || [];
@@ -49,8 +52,48 @@
     console.log('[Analytics Sent] Page view:', eventData);
   }
 
+
   // Fire page view event when script loads
   sendPageViewEvent();
+
+  // Scroll depth tracking
+  const scrollThresholds = [0.25, 0.5, 0.75, 0.9];
+  let scrollFired: Record<number, boolean> = {};
+
+  function sendScrollEvent(percent: number) {
+    if (!hasAnalyticsConsent()) return;
+    const eventData = {
+      event: 'scroll',
+      event_category: 'engagement',
+      event_label: `${Math.round(percent * 100)}%`,
+      event_action: 'scroll_depth',
+      page_location: window.location.href,
+      page_path: getPageName(),
+      scroll_percent: percent,
+      timestamp: Date.now(),
+    };
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(eventData);
+    console.log('[Analytics Sent] Scroll:', eventData);
+  }
+
+  function handleScroll() {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = Math.max(
+      document.documentElement.scrollHeight,
+      document.body.scrollHeight
+    );
+    const winHeight = window.innerHeight;
+    const scrolled = (scrollTop + winHeight) / docHeight;
+    scrollThresholds.forEach((threshold) => {
+      if (scrolled >= threshold && !scrollFired[threshold]) {
+        scrollFired[threshold] = true;
+        sendScrollEvent(threshold);
+      }
+    });
+  }
+
+  window.addEventListener('scroll', handleScroll);
 
   // Listen for consent changes to enable analytics immediately
   window.addEventListener('analyticsConsentChanged', () => {
@@ -67,10 +110,13 @@
     }
     if (anchor) {
       const eventData = {
-        event: 'link_click',
+        event: 'click',
+        event_category: 'link',
+        event_label: anchor.textContent?.trim() || anchor.href,
+        event_action: 'link_click',
+        page_location: window.location.href,
+        page_path: getPageName(),
         href: anchor.href,
-        text: anchor.textContent?.trim(),
-        page: getPageName(),
         dataAttributes: getDataAttributes(anchor),
         elementDetail: anchor.getAttribute('data-element')
       };
@@ -89,9 +135,12 @@
         return;
       }
       const eventData = {
-        event: 'button_click',
-        text: button.textContent?.trim(),
-        page: getPageName(),
+        event: 'click',
+        event_category: 'button',
+        event_label: button.textContent?.trim(),
+        event_action: 'button_click',
+        page_location: window.location.href,
+        page_path: getPageName(),
         dataAttributes: getDataAttributes(button),
         elementDetail: button.getAttribute('data-element')
       };
