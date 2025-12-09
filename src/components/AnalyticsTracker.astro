@@ -109,6 +109,7 @@
       anchor = event.target.closest('a[data-element]');
     }
     if (anchor) {
+        const dataAttrs = getDataAttributes(anchor);
         const eventData = {
           event: 'click',
           event_category: 'link',
@@ -117,7 +118,7 @@
           page_location: window.location.href,
           page_path: getPageName(),
           href: anchor.href,
-          dataAttributes: getDataAttributes(anchor),
+          dataAttributes: dataAttrs,
           element: dataAttrs.element || null,
           element_detail: anchor.getAttribute('data-element'),
           element_label: anchor.textContent?.trim() || anchor.href
