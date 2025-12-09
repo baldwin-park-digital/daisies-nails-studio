@@ -16,8 +16,8 @@ export interface NavigationConfig {
 export const navigationConfig: NavigationConfig = {
   navItems: [
     { label: "Menu", href: "/menu" },
-    { label: "About", href: "./#about" },
-    { label: "Contact", href: "./#contact" }
+    { label: "About", href: "/#about" },
+    { label: "Contact", href: "/#contact" }
   ],
   actionItems: [
     { label: globalSiteConfig.contact.phone || "", href: `tel:${globalSiteConfig.contact.phone}`, variant: "default" },

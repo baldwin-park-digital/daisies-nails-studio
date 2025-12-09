@@ -34,7 +34,7 @@ export const siteConfig: SiteConfig = {
     description: "Luxury nail artistry and spa treatments designed for modern elegance.",
     logo: { part1: "Daisies", part2: "Nails Studio" },
     logoSrc: logoImg,
-    logoHref: "./",
+    logoHref: "/",
   },
   contact: {
     email: "daisiesnailsstudio@gmail.com",
