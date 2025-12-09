@@ -1,5 +1,6 @@
 ---
 import { aboutContent } from "../data/about";
+import heroNails from "../assets/hero_nails.jpg";
 import type { AboutContent } from "../data/about";
 import Card from "./Card.astro";
 
@@ -27,11 +28,13 @@ const variantClasses = {
   <div class="max-w-7xl mx-auto px-6 md:px-2">
     <!-- Header -->
     <div class="mb-12 text-center">
-      {content.subtitle && (
-        <p class="text-sm font-semibold text-on-surface uppercase tracking-wide mb-2">
-          {content.subtitle}
-        </p>
-      )}
+      {
+        content.subtitle && (
+          <p class="text-sm font-semibold text-on-surface uppercase tracking-wide mb-2">
+            {content.subtitle}
+          </p>
+        )
+      }
       <h2 class="text-4xl md:text-3xl font-bold text-primary mb-6">
         {content.title}
       </h2>
@@ -40,27 +43,27 @@ const variantClasses = {
     <!-- Main Content -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
       <!-- Image -->
-      {content.image && (
-        <div class="relative rounded-lg overflow-hidden aspect-4/3">
-          <img
-            src={content.image}
-            alt={content.title}
-            class="w-full h-full object-cover"
-          />
-        </div>
-      )}
-
+      {
+        content.image && (
+          <div class="relative rounded-lg overflow-hidden aspect-4/3 flex justify-center items-center">
+            <img
+              src={heroNails.src}
+              alt="Daisies Nails Studio Hero Nails"
+              class="object-cover rounded-md shadow-md w-4/5"
+              style="max-width:80%; height:auto;"
+              loading="lazy"
+              width="320"
+              height="240"
+            />
+          </div>
+        )
+      }
       <!-- Text Content -->
-      <div>
-        <p class="text-lg text-on-surface-dim leading-relaxed mb-8">
-          {content.description}
-        </p>
-
-        <!-- Stats -->
-        {showStats && content.stats && content.stats.length > 0 && (
-          <div class="grid grid-cols-2 gap-6">
+      {
+        showStats && content.stats && content.stats.length > 0 && (
+          <div class="grid grid-cols-2 gap-8 mt-8">
             {content.stats.map((stat) => (
-              <div class="text-center lg:text-left">
+              <div class="text-center lg:text-left" key={stat.label}>
                 <div class="text-3xl font-bold text-primary mb-1">
                   {stat.value}
                 </div>
@@ -68,20 +71,19 @@ const variantClasses = {
               </div>
             ))}
           </div>
-        )}
-      </div>
+        )
+      }
     </div>
-
-    <!-- Values/Principles -->
-    {showValues && content.values && content.values.length > 0 && (
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {content.values.map((value) => (
-          <Card
-            title={value.title}
-            description={value.description}
-          />
-        ))}
-      </div>
-    )}
   </div>
 </section>
+
+<!-- Values/Principles -->
+{
+  showValues && content.values && content.values.length > 0 && (
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {content.values.map((value) => (
+        <Card title={value.title} description={value.description} />
+      ))}
+    </div>
+  )
+}

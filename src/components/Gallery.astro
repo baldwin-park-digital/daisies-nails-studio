@@ -84,14 +84,14 @@ const categories = showCategories
             type="button"
             aria-label={`View ${image.title || image.alt}`}
           >
-            <img
-              src={image.src.src}
-              width={image.src.width}
-              height={image.src.height}
-              alt={image.alt}
-              class="w-full h-full object-cover"
-              style="transition: transform 300ms ease-out;"
-              loading="lazy"
+              <img
+                src={image.src.src}
+                width={image.src.width}
+                height={image.src.height}
+                alt={image.alt}
+                class="w-full h-full object-cover"
+                style="transition: transform 300ms ease-out;"
+                loading="lazy"
             />
             {(image.title || image.category) && (
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0" style="transition: opacity 300ms ease-out;">
@@ -144,14 +144,14 @@ const categories = showCategories
               type="button"
               aria-label={`View ${image.title || image.alt}`}
             >
-              <img
-                src={image.src.src}
-                width={image.src.width}
-                height={image.src.height}
-                alt={image.alt}
-                class="w-full h-full object-cover"
-                style="transition: transform 300ms ease-out;"
-                loading="lazy"
+                  <img
+                    src={image.src.src}
+                    width={image.src.width}
+                    height={image.src.height}
+                    alt={image.alt}
+                    class="w-full h-full object-cover"
+                    style="transition: transform 300ms ease-out;"
+                    loading="lazy"
               />
               {(image.title || image.category) && (
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0" style="transition: opacity 300ms ease-out;">

@@ -85,6 +85,9 @@ const itemsByCategory = displayItems.reduce((acc, item) => {
                       src={item.image || "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=300&fit=crop"}
                       alt={item.name}
                       class="w-full h-full object-cover"
+                      loading="lazy"
+                      width="400"
+                      height="300"
                     />
                     {/* Gradient overlay */}
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
@@ -133,6 +136,9 @@ const itemsByCategory = displayItems.reduce((acc, item) => {
                         src={item.image}
                         alt={item.name}
                         class="w-full h-full object-cover"
+                        loading="lazy"
+                        width="128"
+                        height="128"
                       />
                     </div>
                   )}
