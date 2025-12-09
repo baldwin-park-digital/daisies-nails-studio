@@ -3,11 +3,11 @@
 ---
 <script>
   // Helper to get all data-* attributes as an object
-  function getDataAttributes(element) {
-    const data = {};
+  function getDataAttributes(element: HTMLElement) {
+    const data: Record<string, string> = {};
     if (element && element.dataset) {
       for (const key in element.dataset) {
-        data[key] = element.dataset[key];
+        data[key] = element.dataset[key] as string;
       }
     }
     return data;
@@ -19,8 +19,26 @@
     return path === '/' || path === '' ? 'home page' : path;
   }
 
-  // Send page view event on initial load
+  // Check consent
+  function getCookie(name?: string) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      const part = parts.pop();
+      if (part !== undefined) {
+        return part.split(';').shift();
+      }
+    }
+    return null;
+  }
+
+  function hasAnalyticsConsent() {
+    return getCookie('daisies_analytics_consent') === 'yes';
+  }
+
+  // Send page view event on initial load if consented
   function sendPageViewEvent() {
+    if (!hasAnalyticsConsent()) return;
     const eventData = {
       event: 'page_view',
       page: getPageName(),
@@ -28,14 +46,25 @@
     };
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push(eventData);
-    // console.log('[Analytics Sent] Page view:', eventData);
+    console.log('[Analytics Sent] Page view:', eventData);
   }
 
   // Fire page view event when script loads
   sendPageViewEvent();
 
+  // Listen for consent changes to enable analytics immediately
+  window.addEventListener('analyticsConsentChanged', () => {
+    if (hasAnalyticsConsent()) {
+      sendPageViewEvent();
+    }
+  });
+
   document.addEventListener('click', function(event) {
-    const anchor = event.target.closest('a[data-element]');
+    if (!hasAnalyticsConsent()) return;
+    let anchor: HTMLAnchorElement | null = null;
+    if (event.target instanceof Element) {
+      anchor = event.target.closest('a[data-element]');
+    }
     if (anchor) {
       const eventData = {
         event: 'link_click',
@@ -47,10 +76,13 @@
       };
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push(eventData);
-      // console.log('[Analytics Sent] Link clicked:', eventData);
+      console.log('[Analytics Sent] Link clicked:', eventData);
       return;
     }
-    const button = event.target.closest('button[data-element]');
+    let button: HTMLButtonElement | null = null;
+    if (event.target instanceof Element) {
+      button = event.target.closest('button[data-element]');
+    }
     if (button) {
       // Only send event for accordion-toggle if not already expanded
       if (button.getAttribute('data-element') === 'accordion-toggle' && button.getAttribute('aria-expanded') !== 'true') {
@@ -65,7 +97,7 @@
       };
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push(eventData);
-      // console.log('[Analytics Sent] Button clicked:', eventData);
+      console.log('[Analytics Sent] Button clicked:', eventData);
     }
   });
 </script>

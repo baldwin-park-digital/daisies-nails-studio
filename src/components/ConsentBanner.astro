@@ -1,0 +1,83 @@
+<script>
+  function getCookie(name: string) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      const part = parts.pop();
+      if (part !== undefined) {
+        return part.split(";").shift();
+      }
+    }
+    return null;
+  }
+
+  const CONSENT_COOKIE = "daisies_analytics_consent";
+
+  window.addEventListener("DOMContentLoaded", function () {
+    if (!getCookie(CONSENT_COOKIE)) {
+      var banner = document.getElementById("consent-banner");
+      if (banner) {
+        banner.style.visibility = "visible";
+        banner.classList.add("animate-consent-banner");
+      }
+    }
+  });
+  
+  (window as any).handleConsent = function (answer: string) {
+    // 7 days in seconds
+    const maxAge = 7 * 24 * 60 * 60;
+    document.cookie = `${CONSENT_COOKIE}=${answer}; path=/; max-age=${maxAge}`;
+    const banner = document.getElementById("consent-banner");
+    if (banner) {
+      banner.style.display = "none";
+    }
+    window.dispatchEvent(new Event("analyticsConsentChanged"));
+  };
+</script>
+<style>
+  @keyframes consentBannerUp {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  .animate-consent-banner {
+    animation: consentBannerUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) 500ms forwards;
+    opacity: 0;
+  }
+</style>
+
+<div
+  id="consent-banner"
+  style="visibility:hidden;opacity:0;"
+  class="fixed bottom-0 left-0 right-0 z-50 bg-surface border-t border-on-surface p-4 shadow-lg text-on-surface font-montserrat"
+>
+  <div
+    class="flex flex-col md:flex-row md:items-center md:justify-between w-full"
+  >
+    <span class="mb-2 md:mb-0 mr-0 md:mr-4">
+      We use cookies and analytics to improve your experience. Do you consent to
+      analytics tracking?
+      <a
+        href="/privacy-policy"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="underline text-primary ml-2"
+      >Privacy Policy</a>
+    </span>
+    <span class="flex flex-row gap-2 justify-end">
+      <button
+        class="button box-border px-4 py-2 rounded transition-colors hover:bg-surface-bright"
+        onclick="handleConsent('no')">Decline</button
+      >
+      <button
+        class="button-primary box-border px-4 py-2 rounded transition-colors hover:bg-primary-hover"
+        onclick="handleConsent('yes')">Accept</button
+      >
+    </span>
+  </div>
+</div>
