@@ -57,10 +57,25 @@ const { title, description = "Welcome to our static site" } = Astro.props;
         rel="stylesheet"
       />
     </noscript>
+
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-T9WL5S8Z");
+    </script>
+
     <script is:inline>
       // Dynamically load GA script client-side
       const gaScript = document.createElement("script");
-      gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-0EH179JZSE ";
+      gaScript.src =
+        "https://www.googletagmanager.com/gtag/js?id=G-0EH179JZSE ";
       gaScript.async = true;
       gaScript.onload = function () {
         window.dataLayer = window.dataLayer || [];
@@ -110,6 +125,15 @@ const { title, description = "Welcome to our static site" } = Astro.props;
     </script>
   </head>
   <body class="surface text-on-surface font-montserrat">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-T9WL5S8Z"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
+    <!-- End Google Tag Manager (noscript) -->
     <Nav />
     <main class="max-w-6xl mx-auto px-6 md:px-2 py-8">
       <slot />
