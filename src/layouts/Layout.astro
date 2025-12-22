@@ -10,19 +10,22 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Welcome to our static site" } = Astro.props;
+const defaultTitle = "Daisies Nails Studio | Nail Art & Spa in YDS";
+const defaultDescription = "Experience beautiful nail art, manicures, and spa treatments at Daisies Nails Studio. Located in YDS, we offer expert nail care, relaxing ambiance, and top-rated service.";
+const { title, description } = Astro.props;
+const pageTitle = title ?? defaultTitle;
+const pageDescription = description ?? defaultDescription;
 ---
 
 <!doctype html>
 <html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
+    <meta name="description" content={pageDescription} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title || "Daisies Nails Studio"}</title>
+    <title>{pageTitle}</title>
     <script is:inline>
       // Apply theme from localStorage or system preference immediately to prevent flash
       let theme = localStorage.getItem("theme");

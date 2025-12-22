@@ -31,7 +31,7 @@ import logoImg from '../assets/logo.png';
 export const siteConfig: SiteConfig = {
   company: {
     name: "Daisies Nail Studio",
-    description: "Luxury nail artistry and spa treatments designed for modern elegance.",
+    description: "Luxury nail art and spa in Los Angeles. Expert care, modern designs, and relaxing treatments at Daisies Nails Studio, 5770 Melrose Ave.",
     logo: { part1: "Daisies", part2: "Nails Studio" },
     logoSrc: logoImg,
     logoHref: "/",
