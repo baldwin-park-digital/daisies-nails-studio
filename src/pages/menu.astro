@@ -9,8 +9,7 @@ import AlmondSVG from "../assets/nails/Almond.svg";
 import BallerinaSVG from "../assets/nails/BallerinaCoffin.svg";
 import StilettoSVG from "../assets/nails/Stilletto.svg";
 
-const seoTitle =
-  "Menu & Pricing - Daisies Nails Studio";
+const seoTitle = "Menu & Pricing - Daisies Nails Studio";
 const seoDescription =
   "Explore our full range of nail services: manicures, pedicures, gel nails, acrylics, and custom nail art. Professional treatments with transparent pricing in Los Angeles.";
 
@@ -47,7 +46,7 @@ const services = {
         "Basic Manicure",
         "Milk & Honey sea salt",
         "Aloe Green Tea Mask",
-        "Parrafin wax",
+        "Paraffin wax",
         "Aloe Green Tea Sea Salt Soak",
         "10-min massage",
         "Callus removal",
@@ -80,7 +79,7 @@ const services = {
         "Aloe Green Tea Mask",
         "Aloe Green Tea Sea Salt Soak",
         "10-min massage",
-        "Parrafin wax",
+        "Paraffin wax",
       ],
     },
   ],
@@ -121,7 +120,7 @@ const services = {
         "Aloe Green Tea scrub",
         "Callus removal",
         "10-min CBD-infused foot massage",
-        "Parrafin wax",
+        "Paraffin wax",
         "Warm towel",
       ],
     },
@@ -153,7 +152,7 @@ const services = {
         "Collagen mask",
         "Aloe Green Tea Soak with essential oils",
         "Aloe Green Tea Sea Scrub",
-        "Parrafin wax",
+        "Paraffin wax",
         "10-min CBD-infused foot massage",
         "Warm towel",
         "Dazzle dry polish",
@@ -163,18 +162,27 @@ const services = {
   enhancements: [
     { name: "Acrylic Full Set w/Gel", price: "$70+" },
     { name: "Gel Extension", price: "$70+" },
-    { name: "Hard Gel", price: "$80+" },
+    { name: "Hard Gel", price: "$75+" },
     { name: "Acrylic Refill", price: "$60+" },
     { name: "Hard Gel Fill", price: "$65+" },
-    { name: "Dipping Powder", price: "$70+" },
+    { name: "Dipping Powder", price: "$60+" },
+    { name: "Gel Extension w/ Removal", price: "$75+" },
   ],
   addOns: [
-    { name: "Gel Color", price: "$25" },
+    { name: "Regular Polish Change Hands", price: "$15" },
+    { name: "Gel Polish Change Hands", price: "$30" },
+    { name: "Regular Polish Change Feet", price: "$20" },
+    { name: "Gel Polish Change Feet", price: "$35" },
+    { name: "Nail Design", price: "$5+" },
     { name: "Callus Removal", price: "$10" },
-    { name: "Gel Change", price: "$35+" },
-    { name: "Parrafin Wax", price: "$15" },
+    { name: "Paraffin Wax", price: "$10" },
     { name: "Buffing Shine", price: "$10" },
     { name: "Acrylic/GelX/Gel Builder Removal", price: "$20+" },
+    { name: "Repair", price: "$10+" },
+    { name: "Cateye Gel Polish", price: "$15" },
+    { name: "Chrome", price: "$15" },
+    { name: "Kid Manicure", price: "$20" },
+    { name: "Kid Pedicure", price: "$20" },
     { name: "Massage", price: "$1 per minute" },
   ],
   waxing: [
@@ -187,17 +195,15 @@ const services = {
     { name: "Full Face", price: "$45" },
     { name: "Full Arm", price: "$40" },
     { name: "Eyebrow Tinting", price: "$25" },
-    { name: "Bikini Line", price: "$30" },
     { name: "Eyelash Tinting", price: "$35" },
-    { name: "Brazilian", price: "$50" },
     { name: "Eyebrow Lamination", price: "$85" },
   ],
   lashes: [
     { name: "Classic Fullset", price: "$120" },
     { name: "Volume Fullset", price: "$150" },
-    { name: "Classic Fill", price: "$60+" },
+    { name: "Classic Fill", price: "$70+" },
     { name: "Volume Fill", price: "$80" },
-    { name: "Design Fullset", price: "$170" },
+    { name: "Design Fullset", price: "$150-170" },
   ],
 };
 ---
@@ -480,7 +486,11 @@ const services = {
     <CTA
       title="Love What You See?"
       description="Your perfect nails are just one click away."
-      primaryCta={{ label: "Get My Appointment", href: "https://daisiesnailsstudio.getrichbooking.com/", external: true }}
+      primaryCta={{
+        label: "Get My Appointment",
+        href: "https://daisiesnailsstudio.getrichbooking.com/",
+        external: true,
+      }}
       variant="gradient"
     />
   </div>

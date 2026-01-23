@@ -31,7 +31,7 @@ import logoImg from '../assets/logo.png';
 export const siteConfig: SiteConfig = {
   company: {
     name: "Daisies Nail Studio",
-    description: "Luxury nail art and spa in Los Angeles. Expert care, modern designs, and relaxing treatments at Daisies Nails Studio, 5770 Melrose Ave.",
+    description: "Luxury nail art and spa in Los Angeles. Expert care, modern designs, and relaxing treatments.",
     logo: { part1: "Daisies", part2: "Nails Studio" },
     logoSrc: logoImg,
     logoHref: "/",
@@ -42,8 +42,9 @@ export const siteConfig: SiteConfig = {
     address: "5770 Melrose Ave, Los Angeles, CA 90038",
   },
   hours: [
-    { day: "Monday - Sunday", time: "9:00 AM - 5:00 PM" },
-    { day: "", time: "Hours may vary on Holidays" },
+    { day: "Monday - Saturday", time: "10:00 AM - 7:00 PM" },
+    { day: "Sunday", time: "10:00 AM - 6:00 PM" },
+    { day: "", time: "Hours may vary on holidays" },
   ],
   social: [
     { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61583520501321"},

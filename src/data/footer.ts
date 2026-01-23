@@ -28,11 +28,7 @@ export const footerConfig: FooterConfig = {
       links: [
         { label: "Nail Technicians, DM your portfolio to us on Instagram.", href: "https://www.instagram.com/daisiesnailsstudio", external: true},
       ],
-    },
-    {
-      title: "Site",
-      links: siteConfig.navItems.map(({ label, href, external }) => ({ label, href, external })),
-    },
+    }
   ],
   legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },
