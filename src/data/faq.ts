@@ -34,22 +34,22 @@ export const faqs: FAQItem[] = [
   {
     id: "7",
     question: "Do you accept walk-ins or last-minute bookings?",
-    answer: "Walk-ins are welcome when available, but booking ahead ensures your preferred time. We also post last-minute openings on Instagram Stories.",
+    answer: "Walk-ins are available until 6:15pm. For nail extensions (Gel-X, Hard Gel, Acrylic), last call is 5:30pm. Booking ahead ensures your preferred time. ",
   },
   {
     id: "9",
     question: "Can I request a specific nail artist or custom design?",
-    answer: "Of course! Share your preferences when booking and we’ll match you with the right artist for your style.",
+    answer: "Of course! Share your inspo pics through our Instgram DMs or text us at our number, (323) 957-9879.",
   },
   {
     id: "10",
     question: "What payment methods do you accept?",
-    answer: "We accept all major credit cards, Apple Pay, and cash. No hidden fees—just beautiful nails.",
+    answer: "We accept cash, Venmo, Zelle, credit cards, and Apple Pay. No hidden fees—just beautiful nails.",
   },
   {
     id: "11",
     question: "Is parking available?",
-    answer: "Yes, convenient parking is available near our studio at 5770 Melrose Ave, Los Angeles.",
+    answer: "Yes, street parking is available near our studio and we have limited spots in our lot.",
   },
 ];
 
